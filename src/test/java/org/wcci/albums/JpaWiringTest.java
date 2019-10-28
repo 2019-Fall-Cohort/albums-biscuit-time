@@ -4,11 +4,13 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertEquals;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
@@ -20,8 +22,14 @@ public class JpaWiringTest {
 	@Autowired
 	private AlbumRepository albumRepo;
 	@Autowired
+	private SongRepository songRepo;
+	@Autowired
 	private TestEntityManager entityManager;
 	
+//	@Before
+//	public setup() {
+//		Artist testArtist = new Artist("Ben");
+//	}
 
 	@Test
 	public void artistWillHaveAlbums() throws Exception {
@@ -40,5 +48,23 @@ public class JpaWiringTest {
 		
 		assertEquals(testArtist, retrievedArtist);
 		assertThat(retrievedArtist.getAlbums(), contains(testAlbum1));
+	}
+	
+	@Test
+	public void songsWillHaveArtist() throws Exception {
+		Song testSong = new Song("Biscuit Time");
+		
+		Artist testArtist = new Artist("Ben");
+		
+		testSong = songRepo.save(testSong);
+		
+		testArtist = artistRepo.save(testArtist);
+		
+		entityManager.flush();
+		entityManager.clear();
+		
+		Song retrievedSong = songRepo.findById(testSong.getId()).get();
+		
+		assertEquals(testSong, retrievedSong);
 	}
 }
