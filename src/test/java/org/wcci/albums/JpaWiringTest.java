@@ -5,6 +5,7 @@ import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,4 +68,26 @@ public class JpaWiringTest {
 		
 		assertEquals(testSong, retrievedSong);
 	}
+	
+	@Test
+	public void albumsWillHaveSongs() throws Exception {
+		Artist testArtist = new Artist("Ben");
+		Album testAlbum = new Album("Dry Biscuits", testArtist);
+		Song testSong = new Song("Biscuit Time");
+		
+		
+		testAlbum = albumRepo.save(testAlbum);
+		testSong = songRepo.save(testSong);
+		testArtist = artistRepo.save(testArtist);
+		
+		
+		entityManager.flush();
+		entityManager.clear();
+		
+		Album retrievedAlbum = albumRepo.findById(testAlbum.getId()).get();
+		assertEquals(testAlbum, retrievedAlbum);
+		assertThat(retrievedAlbum.getSongs(), contains(testSong));
+		
+	}
+	
 }

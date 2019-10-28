@@ -39,6 +39,7 @@ public class Artist {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((albums == null) ? 0 : albums.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
@@ -53,6 +54,11 @@ public class Artist {
 		if (getClass() != obj.getClass())
 			return false;
 		Artist other = (Artist) obj;
+		if (albums == null) {
+			if (other.albums != null)
+				return false;
+		} else if (!albums.equals(other.albums))
+			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -65,9 +71,5 @@ public class Artist {
 			return false;
 		return true;
 	}
-	
-	
-
-	
 	
 }
