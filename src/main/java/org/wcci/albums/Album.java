@@ -20,15 +20,16 @@ public class Album {
 	@JsonIgnore
 	@ManyToOne
 	private Artist artist;
-	@OneToMany(mappedBy = "album")
+	@OneToMany(mappedBy ="album")
 	private List<Song> songs;
 
-	protected Album() {}
-	
+	protected Album() {
+	}
+
 	public Album(String title, Artist artist) {
 		this.title = title;
 		this.artist = artist;
-		
+
 	}
 
 	public String getTitle() {
@@ -38,9 +39,13 @@ public class Album {
 	public Artist getArtist() {
 		return artist;
 	}
-	
+
 	public Long getId() {
 		return id;
+	}
+
+	public List<Song> getSongs() {
+		return songs;
 	}
 
 	@Override
@@ -73,11 +78,6 @@ public class Album {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (songs == null) {
-			if (other.songs != null)
-				return false;
-		} else if (!songs.equals(other.songs))
-			return false;
 		if (title == null) {
 			if (other.title != null)
 				return false;
@@ -86,10 +86,9 @@ public class Album {
 		return true;
 	}
 
-	public List<Song> getSongs() {
-		return songs;
+	@Override
+	public String toString() {
+		return "Album [id=" + id + ", title=" + title + ", artist=" + artist + "]";
 	}
 	
-	
-
 }

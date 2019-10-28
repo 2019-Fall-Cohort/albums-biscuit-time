@@ -54,11 +54,6 @@ public class Artist {
 		if (getClass() != obj.getClass())
 			return false;
 		Artist other = (Artist) obj;
-		if (albums == null) {
-			if (other.albums != null)
-				return false;
-		} else if (!albums.equals(other.albums))
-			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -70,6 +65,11 @@ public class Artist {
 		} else if (!name.equals(other.name))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Artist [id=" + id + ", name=" + name + "]";
 	}
 	
 }

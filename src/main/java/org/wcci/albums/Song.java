@@ -15,12 +15,12 @@ public class Song {
 	@ManyToOne
 	private Album album;
 	
-
+	protected Song() {}
+	
 	public Song(String name) {
 		this.name = name;	
 	}
 
-	public Song() {}
 	
 	public String getName() {
 		return name;
@@ -28,6 +28,10 @@ public class Song {
 
 	public Long getId() {
 		return id;
+	}
+	
+	public Album getAlbum() {
+		return album;
 	}
 
 	@Override
