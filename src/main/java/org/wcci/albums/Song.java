@@ -1,28 +1,27 @@
 package org.wcci.albums;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class Artist {
+public class Song {
 	
 	@Id
 	@GeneratedValue
 	private Long id;
 	private String name;
-	@OneToMany(mappedBy="artist")
-	private List<Album> albums;
-
-	protected Artist() {}
+	@ManyToOne
+	private Album album;
 	
-	public Artist(String name) {
-		this.name = name;;
+	protected Song() {}
+	
+	public Song(String name) {
+		this.name = name;	
 	}
 
+	
 	public String getName() {
 		return name;
 	}
@@ -30,16 +29,16 @@ public class Artist {
 	public Long getId() {
 		return id;
 	}
-
-	public List<Album> getAlbums() {
-		return albums;
+	
+	public Album getAlbum() {
+		return album;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((albums == null) ? 0 : albums.hashCode());
+		result = prime * result + ((album == null) ? 0 : album.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
@@ -53,7 +52,12 @@ public class Artist {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Artist other = (Artist) obj;
+		Song other = (Song) obj;
+		if (album == null) {
+			if (other.album != null)
+				return false;
+		} else if (!album.equals(other.album))
+			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -67,9 +71,10 @@ public class Artist {
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		return "Artist [id=" + id + ", name=" + name + "]";
-	}
+	
+
+
+
+
 	
 }

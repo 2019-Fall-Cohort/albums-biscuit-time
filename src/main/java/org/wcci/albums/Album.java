@@ -1,9 +1,12 @@
 package org.wcci.albums;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -17,13 +20,16 @@ public class Album {
 	@JsonIgnore
 	@ManyToOne
 	private Artist artist;
+	@OneToMany(mappedBy ="album")
+	private List<Song> songs;
 
-	protected Album() {}
-	
+	protected Album() {
+	}
+
 	public Album(String title, Artist artist) {
 		this.title = title;
 		this.artist = artist;
-		
+
 	}
 
 	public String getTitle() {
@@ -33,9 +39,13 @@ public class Album {
 	public Artist getArtist() {
 		return artist;
 	}
-	
+
 	public Long getId() {
 		return id;
+	}
+
+	public List<Song> getSongs() {
+		return songs;
 	}
 
 	@Override
@@ -44,6 +54,7 @@ public class Album {
 		int result = 1;
 		result = prime * result + ((artist == null) ? 0 : artist.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((songs == null) ? 0 : songs.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
 	}
@@ -74,7 +85,10 @@ public class Album {
 			return false;
 		return true;
 	}
-	
-	
 
+	@Override
+	public String toString() {
+		return "Album [id=" + id + ", title=" + title + ", artist=" + artist + "]";
+	}
+	
 }
