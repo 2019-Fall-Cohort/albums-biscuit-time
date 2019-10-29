@@ -26,16 +26,17 @@ public class JpaWiringTest {
 	@Autowired
 	private TestEntityManager entityManager;
 	
+	Artist testArtist = new Artist("Ben");
+	Album testAlbum = new Album("Greatest Hits", testArtist);
+	Song testSong = new Song("Biscuit Time", testAlbum);
 
 	@Test
 	public void artistWillHaveAlbums() throws Exception {
-		Artist testArtist = new Artist("Ben");
 		
-		Album testAlbum1 = new Album("Greatest Hits", testArtist);
 		
 		testArtist = artistRepo.save(testArtist);
 		
-		testAlbum1 = albumRepo.save(testAlbum1);
+		testAlbum = albumRepo.save(testAlbum);
 		
 		entityManager.flush();
 		entityManager.clear();
@@ -43,32 +44,11 @@ public class JpaWiringTest {
 		Artist retrievedArtist = artistRepo.findById(testArtist.getId()).get();
 		
 		assertEquals(testArtist, retrievedArtist);
-		assertThat(retrievedArtist.getAlbums(), contains(testAlbum1));
+		assertThat(retrievedArtist.getAlbums(), contains(testAlbum));
 	}
-	
-	@Test
-	public void songsWillHaveArtist() throws Exception {
-		Song testSong = new Song("Biscuit Time");
 		
-		Artist testArtist = new Artist("Brian");
-		
-		testSong = songRepo.save(testSong);
-		
-		testArtist = artistRepo.save(testArtist);
-		
-		entityManager.flush();
-		entityManager.clear();
-		
-		Song retrievedSong = songRepo.findById(testSong.getId()).get();
-		
-		assertEquals(testSong, retrievedSong);
-	}
-	
 	@Test
 	public void albumsWillHaveSongs() throws Exception {
-		Artist testArtist = new Artist("Robby");
-		Album testAlbum = new Album("Dry Biscuits", testArtist);
-		Song testSong = new Song("Biscuit Time");
 		
 		testArtist = artistRepo.save(testArtist);
 		testAlbum = albumRepo.save(testAlbum);
