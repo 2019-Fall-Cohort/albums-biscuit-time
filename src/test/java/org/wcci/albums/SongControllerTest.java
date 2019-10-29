@@ -61,4 +61,22 @@ public class SongControllerTest {
 			   .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8)).andExpect(jsonPath("$", hasSize(1)))
 			   .andExpect(jsonPath("$[0].name", is(equalTo("testSong"))));
 	}
+	
+	@Test
+	public void fetchByIdReturnsSingleSong() {
+		when(songRepo.findById(1L)).thenReturn(Optional.of(testSong));
+		Song retrievedSong = underTest.fetchById(1L);
+		assertThat(retrievedSong, is(testSong));
+	}
+	
+	@Test
+	public void fetchByIdIsMappedCorrectlyAndReturnsAJsonSong() throws Exception {
+		when(songRepo.findById(1L)).thenReturn(Optional.of(testSong));
+		mockMvc.perform(get("/api/songs/1"))
+			   .andDo(print())
+		       .andExpect(status().isOk())
+			   .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+			   .andExpect(jsonPath("$.name", is(equalTo("testSong"))));
+	}
+	
 }
