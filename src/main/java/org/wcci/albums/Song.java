@@ -17,8 +17,9 @@ public class Song {
 	
 	protected Song() {}
 	
-	public Song(String name) {
+	public Song(String name, Album album) {
 		this.name = name;	
+		this.album = album;
 	}
 
 	
@@ -70,11 +71,5 @@ public class Song {
 			return false;
 		return true;
 	}
-
-	
-
-
-
-
 	
 }
