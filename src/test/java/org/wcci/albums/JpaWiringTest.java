@@ -4,8 +4,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Before;
-import org.junit.Ignore;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +26,6 @@ public class JpaWiringTest {
 	@Autowired
 	private TestEntityManager entityManager;
 	
-//	@Before
-//	public setup() {
-//		Artist testArtist = new Artist("Ben");
-//	}
 
 	@Test
 	public void artistWillHaveAlbums() throws Exception {
