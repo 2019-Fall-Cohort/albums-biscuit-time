@@ -1,28 +1,30 @@
-package org.wcci.albums;
+package org.wcci.albums.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.*;
+
+
 
 @Entity
-public class Song {
+public class Artist {
 	
 	@Id
 	@GeneratedValue
 	private Long id;
 	private String name;
-	@ManyToOne
-	private Album album;
+	@OneToMany(mappedBy="artist")
+	private List<Album> albums;
+	@ElementCollection
+	private List<Comment> comments;
+
+	protected Artist() {}
 	
-	protected Song() {}
-	
-	public Song(String name, Album album) {
-		this.name = name;	
-		this.album = album;
+	public Artist(String name) {
+		this.name = name;;
+		comments = new ArrayList<>();
 	}
 
-	
 	public String getName() {
 		return name;
 	}
@@ -30,16 +32,25 @@ public class Song {
 	public Long getId() {
 		return id;
 	}
-	
-	public Album getAlbum() {
-		return album;
+
+	public List<Album> getAlbums() {
+		return albums;
 	}
+	
+	public void addComment(Comment comment) {
+		comments.add(comment);	
+	}
+		
+	public List<Comment> getComments() {
+		return comments;
+	}
+	
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((album == null) ? 0 : album.hashCode());
+		result = prime * result + ((albums == null) ? 0 : albums.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
@@ -53,12 +64,7 @@ public class Song {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Song other = (Song) obj;
-		if (album == null) {
-			if (other.album != null)
-				return false;
-		} else if (!album.equals(other.album))
-			return false;
+		Artist other = (Artist) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -71,5 +77,11 @@ public class Song {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Artist [id=" + id + ", name=" + name + "]";
+	}
+
 	
 }
