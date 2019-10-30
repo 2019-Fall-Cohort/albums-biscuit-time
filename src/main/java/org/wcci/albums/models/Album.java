@@ -1,4 +1,4 @@
-package org.wcci.albums;
+package org.wcci.albums.models;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,42 +8,54 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Song {
-	
+public class Album {
+
 	@Id
 	@GeneratedValue
 	private Long id;
-	private String name;
+	private String title;
+	@JsonIgnore
 	@ManyToOne
-	private Album album;
+	private Artist artist;
+	@OneToMany(mappedBy ="album")
+	private List<Song> songs;
 	@ElementCollection
 	private List<Comment> comments;
-	
-	protected Song() {}
-	
-	public Song(String name, Album album) {
-		this.name = name;	
-		this.album = album;
-		comments = new ArrayList<>();
+
+	protected Album() {
 	}
 
-	
-	public String getName() {
-		return name;
+	public Album(String title, Artist artist) {
+		this.title = title;
+		this.artist = artist;
+		comments = new ArrayList<>();
+
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public Artist getArtist() {
+		return artist;
 	}
 
 	public Long getId() {
 		return id;
 	}
-	
-	public Album getAlbum() {
-		return album;
+
+	public List<Song> getSongs() {
+		return songs;
 	}
 	
 	public void addComment(Comment comment) {
 		comments.add(comment);
+		
 	}
 	
 	public List<Comment> getComments() {
@@ -54,11 +66,13 @@ public class Song {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((album == null) ? 0 : album.hashCode());
+		result = prime * result + ((artist == null) ? 0 : artist.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((songs == null) ? 0 : songs.hashCode());
+		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
 	}
+	
 
 	@Override
 	public boolean equals(Object obj) {
@@ -68,23 +82,28 @@ public class Song {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Song other = (Song) obj;
-		if (album == null) {
-			if (other.album != null)
+		Album other = (Album) obj;
+		if (artist == null) {
+			if (other.artist != null)
 				return false;
-		} else if (!album.equals(other.album))
+		} else if (!artist.equals(other.artist))
 			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (name == null) {
-			if (other.name != null)
+		if (title == null) {
+			if (other.title != null)
 				return false;
-		} else if (!name.equals(other.name))
+		} else if (!title.equals(other.title))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Album [id=" + id + ", title=" + title + ", artist=" + artist + "]";
 	}
 
 	

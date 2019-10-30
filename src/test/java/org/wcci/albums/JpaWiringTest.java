@@ -12,6 +12,13 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.wcci.albums.models.Album;
+import org.wcci.albums.models.Artist;
+import org.wcci.albums.models.Comment;
+import org.wcci.albums.models.Song;
+import org.wcci.albums.repositories.AlbumRepository;
+import org.wcci.albums.repositories.ArtistRepository;
+import org.wcci.albums.repositories.SongRepository;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest

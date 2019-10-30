@@ -1,30 +1,35 @@
-package org.wcci.albums;
+package org.wcci.albums.models;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.*;
 
-
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class Artist {
+public class Song {
 	
 	@Id
 	@GeneratedValue
 	private Long id;
 	private String name;
-	@OneToMany(mappedBy="artist")
-	private List<Album> albums;
+	@ManyToOne
+	private Album album;
 	@ElementCollection
 	private List<Comment> comments;
-
-	protected Artist() {}
 	
-	public Artist(String name) {
-		this.name = name;;
+	protected Song() {}
+	
+	public Song(String name, Album album) {
+		this.name = name;	
+		this.album = album;
 		comments = new ArrayList<>();
 	}
 
+	
 	public String getName() {
 		return name;
 	}
@@ -32,25 +37,24 @@ public class Artist {
 	public Long getId() {
 		return id;
 	}
-
-	public List<Album> getAlbums() {
-		return albums;
+	
+	public Album getAlbum() {
+		return album;
 	}
 	
 	public void addComment(Comment comment) {
-		comments.add(comment);	
+		comments.add(comment);
 	}
-		
+	
 	public List<Comment> getComments() {
 		return comments;
 	}
-	
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((albums == null) ? 0 : albums.hashCode());
+		result = prime * result + ((album == null) ? 0 : album.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
@@ -64,7 +68,12 @@ public class Artist {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Artist other = (Artist) obj;
+		Song other = (Song) obj;
+		if (album == null) {
+			if (other.album != null)
+				return false;
+		} else if (!album.equals(other.album))
+			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -76,11 +85,6 @@ public class Artist {
 		} else if (!name.equals(other.name))
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "Artist [id=" + id + ", name=" + name + "]";
 	}
 
 	
