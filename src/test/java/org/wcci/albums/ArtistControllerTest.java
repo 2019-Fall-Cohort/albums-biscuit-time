@@ -27,6 +27,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.wcci.albums.controllers.ArtistController;
 import org.wcci.albums.models.Artist;
+import org.wcci.albums.models.Comment;
 import org.wcci.albums.services.ArtistService;
 
 public class ArtistControllerTest {
