@@ -29,7 +29,9 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.wcci.albums.controllers.AlbumController;
 import org.wcci.albums.models.Album;
 import org.wcci.albums.models.Artist;
+import org.wcci.albums.models.Comment;
 import org.wcci.albums.services.AlbumService;
+
 
 public class AlbumControllerTest {
 
@@ -51,14 +53,14 @@ public class AlbumControllerTest {
 
 	@Test
 	public void fetchAllReturnsListOfAlbums() throws Exception {
-		when(albumService.findAllAlbums()).thenReturn(Collections.singletonList(testAlbum));
+		when(albumService.fetchAllAlbums()).thenReturn(Collections.singletonList(testAlbum));
 		Iterable<Album> retrievedAlbums = underTest.fetchAll();
 		assertThat(retrievedAlbums, contains(testAlbum));
 	}
 
 	@Test
 	public void fetchAllIsMappedCorrectlyAndReturnsAJsonList() throws Exception {
-		when(albumService.findAllAlbums()).thenReturn(Collections.singletonList(testAlbum));
+		when(albumService.fetchAllAlbums()).thenReturn(Collections.singletonList(testAlbum));
 		mockMvc.perform(get("/api/albums"))
 		       .andDo(print())
 		       .andExpect(status().isOk())
@@ -68,14 +70,14 @@ public class AlbumControllerTest {
 
 	@Test
 	public void fetchByIdReturnsSingleAlbum() {
-		when(albumService.findAlbum(1L)).thenReturn(testAlbum);
+		when(albumService.fetchAlbum(1L)).thenReturn(testAlbum);
 		Album retrievedAlbum = underTest.fetchById(1L);
 		assertThat(retrievedAlbum, is(testAlbum));
 	}
 
 	@Test
 	public void fetchByIdIsMappedCorrectlyAndReturnsAJsonAlbum() throws Exception {
-		when(albumService.findAlbum(1L)).thenReturn(testAlbum);
+		when(albumService.fetchAlbum(1L)).thenReturn(testAlbum);
 		mockMvc.perform(get("/api/albums/1"))
 			   .andDo(print())
 		       .andExpect(status().isOk())
@@ -83,5 +85,14 @@ public class AlbumControllerTest {
 			   .andExpect(jsonPath("$.title", is(equalTo("testAlbum"))));
 
 	}
-
+	
+	@Test
+    public void addCommentAddsCommentsToSelectedAlbum() {
+        when(albumService.fetchAlbum(1L)).thenReturn(testAlbum);
+        when(albumService.saveAlbum(testAlbum)).thenReturn(testAlbum);
+        Comment testComment = new Comment("TESTING", "TESTY");
+        Album commentedOnAlbum = underTest.addComment(1L, testComment);
+        assertThat(commentedOnAlbum.getComments(), contains(testComment));
+    }
+	
 }

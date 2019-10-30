@@ -3,29 +3,31 @@ package org.wcci.albums.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import org.wcci.albums.models.Album;
 import org.wcci.albums.repositories.AlbumRepository;
 
-@Repository
+@Service
 public class AlbumService {
 	
 	@Autowired
 	AlbumRepository albumRepo;
 	
-	public void addAlbum(Album albumToAdd) {
-		albumRepo.save(albumToAdd);
+	public Album saveAlbum(Album album) {
+		return albumRepo.save(album);
 	}
 
-	public Album findAlbum(Long id) {
+	public Album fetchAlbum(Long id) {
 		return albumRepo.findById(id).get();
+    }
+	
+	public List<Album> fetchAllAlbums() {
+		return (List<Album>) albumRepo.findAll();
 	}
 
-	public Iterable<Album> findAllAlbums() {
-		return albumRepo.findAll();
 	}
 	
 	
 	
 
-}
+
