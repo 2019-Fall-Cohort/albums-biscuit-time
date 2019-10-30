@@ -1,11 +1,10 @@
 package org.wcci.albums;
 
+import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+
 
 @Entity
 public class Artist {
@@ -16,11 +15,14 @@ public class Artist {
 	private String name;
 	@OneToMany(mappedBy="artist")
 	private List<Album> albums;
+	@ElementCollection
+	private List<Comment> comments;
 
 	protected Artist() {}
 	
 	public Artist(String name) {
 		this.name = name;;
+		comments = new ArrayList<>();
 	}
 
 	public String getName() {
@@ -34,6 +36,15 @@ public class Artist {
 	public List<Album> getAlbums() {
 		return albums;
 	}
+	
+	public void addComment(Comment comment) {
+		comments.add(comment);	
+	}
+		
+	public List<Comment> getComments() {
+		return comments;
+	}
+	
 
 	@Override
 	public int hashCode() {
@@ -71,5 +82,6 @@ public class Artist {
 	public String toString() {
 		return "Artist [id=" + id + ", name=" + name + "]";
 	}
+
 	
 }

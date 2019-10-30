@@ -64,4 +64,19 @@ public class JpaWiringTest {
 		
 	}
 	
+	@Test
+    public void artistsCanHaveComments() throws Exception {
+        Artist testArtist = new Artist("Ben");
+        Comment testComment = new Comment("This is an amazing comment!", "BOB");
+        
+        testArtist.addComment(testComment);
+        testArtist = artistRepo.save(testArtist);
+        
+        entityManager.flush();
+        entityManager.clear();
+        
+        Artist retrievedArtist = artistRepo.findById(testArtist.getId()).get();
+        assertThat(retrievedArtist.getComments(), contains(testComment));
+    }
+	
 }
