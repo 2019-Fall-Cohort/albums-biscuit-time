@@ -1,8 +1,10 @@
 package org.wcci.albums.services;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import org.wcci.albums.models.Artist;
 import org.wcci.albums.repositories.ArtistRepository;
 
@@ -13,34 +15,18 @@ public class ArtistService {
 	ArtistRepository artistRepo;
 	
 
-	public Artist addArtist(Artist artistToAdd) {
-		return artistRepo.save(artistToAdd);
+	public Artist saveArtist(Artist artist) {
+		return artistRepo.save(artist);
 
 	}
 
-	public Artist findArtist(Long id) {
+	public Artist fetchArtist(Long id) {
 		return artistRepo.findById(id).get();
 	}
 
-	public Iterable<Artist> findAllArtists() {
-		return artistRepo.findAll();
+	public List<Artist> fetchAllArtists() {
+		return (List<Artist>) artistRepo.findAll();
 	}
 
-	public Artist fetchArtist(long id) {
-//		Optional<Artist> retrieveArtistOptional = artistRepo.findById(id);
-	 return artistRepo.findById(id).get();
-			 
-//		if (!retrievedArtistOptional.isPresent()) {
-//			throw new ArtistNotFoundExceptional("Artist not Found.");
-//		}
-//		return retrievedArtistOptional.get;
-	}
-
-	public Artist saveArtist(Artist artist) {
-		return artistRepo.save(artist);
-	}
 	
-	
-	
-
 }

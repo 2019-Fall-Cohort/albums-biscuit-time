@@ -6,10 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-<<<<<<< HEAD
+
 import org.springframework.web.bind.annotation.PostMapping;
-=======
->>>>>>> dev
+
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,23 +30,23 @@ public class ArtistController {
 	
 	@GetMapping("")
 	public List<Artist> fetchAll() {
-		return (List<Artist>) artistService.findAllArtists();
+		return (List<Artist>) artistService.fetchAllArtists();
 	}
 	
-<<<<<<< HEAD
+
 	@PostMapping("")
 	public Artist addArtist(@RequestBody Artist artistToAdd) {
-		return artistService.addArtist(artistToAdd);
+		return artistService.saveArtist(artistToAdd);
 	}
 
 	@PatchMapping("/{id}/addTag")
 	public Artist addTag(@PathVariable Long id,@RequestBody Tag tagToAdd) {
-		Artist artistToAdd = artistService.findArtist(id);
+		Artist artistToAdd = artistService.fetchArtist(id);
 		tagToAdd.addArtist(artistToAdd);
 		tagRepo.save(tagToAdd);
-		return artistService.findArtist(id);
+		return artistService.fetchArtist(id);
 	}
-=======
+
 	@GetMapping("/{id}")
 	public Artist fetchById(@PathVariable long id) {
 		return artistService.fetchArtist(id);
@@ -62,5 +61,5 @@ public class ArtistController {
 	}
 	
 	
->>>>>>> dev
+
 }

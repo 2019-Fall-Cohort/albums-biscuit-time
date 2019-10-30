@@ -46,14 +46,14 @@ public class ArtistControllerTest {
 	
 	@Test
 	public void fetchAllReturnsListOfArtists () {
-		when(artistService.findAllArtists()).thenReturn(Collections.singletonList(testArtist));
+		when(artistService.fetchAllArtists()).thenReturn(Collections.singletonList(testArtist));
 		List<Artist> retrievedArtists = underTest.fetchAll();
 		assertThat(retrievedArtists, contains(testArtist));	
 	}
 	
 	@Test
 	public void shouldReturnAllArtists () throws Exception{
-		when(artistService.findAllArtists()).thenReturn(Collections.singletonList(testArtist));
+		when(artistService.fetchAllArtists()).thenReturn(Collections.singletonList(testArtist));
 		mockMvc.perform(get("/api/artists"))
 			   .andDo(print())
 			   .andExpect(status().isOk())
@@ -105,11 +105,11 @@ public class ArtistControllerTest {
 
 	@Test
 	public void addTagToArtist() throws Exception {
-		when(artistService.findArtist(1L)).thenReturn(testArtist);
+		when(artistService.fetchArtist(1L)).thenReturn(testArtist);
 		Tag utTag = new Tag("Test Tag");
 		underTest.addTag(1L, utTag);
 		utTag.addArtist(testArtist);
 		verify(tagRepo).save(utTag);
-		verify(artistService, times(2)).findArtist(1L);
+		verify(artistService, times(2)).fetchArtist(1L);
 	}
 }
