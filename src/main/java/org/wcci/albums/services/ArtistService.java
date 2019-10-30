@@ -1,8 +1,10 @@
-package org.wcci.albums;
+package org.wcci.albums.services;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.wcci.albums.models.Artist;
+import org.wcci.albums.repositories.ArtistRepository;
 
 @Repository
 public class ArtistService {

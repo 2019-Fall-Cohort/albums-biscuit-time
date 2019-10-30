@@ -12,6 +12,13 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.wcci.albums.models.Album;
+import org.wcci.albums.models.Artist;
+import org.wcci.albums.models.Comment;
+import org.wcci.albums.models.Song;
+import org.wcci.albums.repositories.AlbumRepository;
+import org.wcci.albums.repositories.ArtistRepository;
+import org.wcci.albums.repositories.SongRepository;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -77,6 +84,42 @@ public class JpaWiringTest {
         
         Artist retrievedArtist = artistRepo.findById(testArtist.getId()).get();
         assertThat(retrievedArtist.getComments(), contains(testComment));
+    }
+	
+	@Test
+    public void albumsCanHaveComments() throws Exception {
+		Artist testArtist = new Artist("Ben");
+		Album testAlbum = new Album("Greatest Hits", testArtist);
+        Comment testComment = new Comment("This is an amazing comment!", "BOB");
+        
+        testArtist = artistRepo.save(testArtist);
+        testAlbum = albumRepo.save(testAlbum);
+        testAlbum.addComment(testComment);
+        
+        entityManager.flush();
+        entityManager.clear();
+        
+        Album retrievedAlbum = albumRepo.findById(testAlbum.getId()).get();
+        assertThat(retrievedAlbum.getComments(), contains(testComment));
+    }
+	
+	@Test
+    public void songsCanHaveComments() throws Exception {
+		Artist testArtist = new Artist("Ben");
+		Album testAlbum = new Album("Greatest Hits", testArtist);
+		Song testSong = new Song("Biscuit Time", testAlbum);
+        Comment testComment = new Comment("This is an amazing comment!", "BOB");
+        
+        testArtist = artistRepo.save(testArtist);
+        testAlbum = albumRepo.save(testAlbum);
+        testSong = songRepo.save(testSong);
+        testSong.addComment(testComment);
+        
+        entityManager.flush();
+        entityManager.clear();
+        
+        Song retrievedSong = songRepo.findById(testSong.getId()).get();
+        assertThat(retrievedSong.getComments(), contains(testComment));
     }
 	
 }
