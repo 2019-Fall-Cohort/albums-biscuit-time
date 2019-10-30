@@ -64,6 +64,43 @@ public class ArtistControllerTest {
 		       .andExpect(jsonPath("$[0].name", is(equalTo("Jane"))));
 	}
 	
+	@Test
+	public void fetchByIdReturnsSingleArtist() {
+		when(artistService.fetchArtist(1L)).thenReturn(testArtist);
+		Artist retrievedArtist = underTest.fetchById(1L);
+		assertThat(retrievedArtist, is(testArtist));
+	}
+	
+//	@Test
+//	public void fetchByArtistIsMappedCorrectlyandReturnsAJsonArtist() throws Exception{
+//		when(artistService.fetchArtist(1L)).thenReturn(testArtist);
+//		mockMvc.perform(get("api/artists/1"))
+//		.andDo(print())
+//		.andExpect(status().isOk())
+//		.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+//		.andExpect(jsonPath("$.name", is(equalTo("Luke"))));
+//		
+//	}
+	
+	@Test
+	public void addCommentsAddsArtistComment() {
+		when(artistService.fetchArtist(1L)).thenReturn(testArtist);
+		when(artistService.saveArtist(testArtist)).thenReturn(testArtist);
+		Comment testComment = new Comment("Testing", "test");
+		Artist commentOnArtist = underTest.addComment(1L, testComment);
+		assertThat(commentOnArtist.getComments(), contains(testComment));
+	}
+	
+//	@Test
+//	public void addCommentToArtistMappingWorks() throws Exception {
+//		when(artistService.fetchArtist(1L)).thenReturn(testArtist);
+//		when(artistService.saveArtist(testArtist)).thenReturn(testArtist);
+//		
+//		
+//	}
+	
+	
+	
 	
 
 }
