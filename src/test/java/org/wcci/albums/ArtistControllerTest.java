@@ -32,7 +32,7 @@ public class ArtistControllerTest {
 	ArtistController underTest;
 	
 	@Mock
-	ArtistRepository artistRepo;
+	ArtistService artistService;
 	private MockMvc mockMvc;
 	private Artist testArtist;
 	
@@ -45,14 +45,14 @@ public class ArtistControllerTest {
 	
 	@Test
 	public void fetchAllReturnsListOfArtists () {
-		when(artistRepo.findAll()).thenReturn(Collections.singletonList(testArtist));
+		when(artistService.findAllArtists()).thenReturn(Collections.singletonList(testArtist));
 		List<Artist> retrievedArtists = underTest.fetchAll();
 		assertThat(retrievedArtists, contains(testArtist));	
 	}
 	
 	@Test
 	public void shouldReturnAllArtists () throws Exception{
-		when(artistRepo.findAll()).thenReturn(Collections.singletonList(testArtist));
+		when(artistService.findAllArtists()).thenReturn(Collections.singletonList(testArtist));
 		mockMvc.perform(get("/api/artists"))
 			   .andDo(print())
 			   .andExpect(status().isOk())

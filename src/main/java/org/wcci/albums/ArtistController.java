@@ -13,12 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class ArtistController {
 
 	@Autowired
-	private ArtistRepository artistRepo;
-
+	private ArtistService artistService;
 	
 	@GetMapping("")
 	public List<Artist> fetchAll() {
-		return (List<Artist>) artistRepo.findAll();
+		return (List<Artist>) artistService.findAllArtists();
 	}
 	
 	public Artist fetchById(@PathVariable long id) {
