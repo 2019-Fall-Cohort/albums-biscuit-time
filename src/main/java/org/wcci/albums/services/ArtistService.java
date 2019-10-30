@@ -11,8 +11,8 @@ public class ArtistService {
 	@Autowired
 	ArtistRepository artistRepo;
 	
-	public void addArtist(Artist artistToAdd) {
-		artistRepo.save(artistToAdd);
+	public Artist addArtist(Artist artistToAdd) {
+		return artistRepo.save(artistToAdd);
 	}
 
 	public Artist findArtist(Long id) {

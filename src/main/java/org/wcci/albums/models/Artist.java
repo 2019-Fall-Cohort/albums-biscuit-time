@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
+import org.wcci.albums.Tag;
+
 
 
 @Entity
@@ -17,6 +19,8 @@ public class Artist {
 	private List<Album> albums;
 	@ElementCollection
 	private List<Comment> comments;
+	@ManyToMany(mappedBy="artists")
+	private List<Tag> tags;
 
 	protected Artist() {}
 	
