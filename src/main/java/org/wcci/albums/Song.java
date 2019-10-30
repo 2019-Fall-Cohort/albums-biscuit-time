@@ -1,5 +1,9 @@
 package org.wcci.albums;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -14,12 +18,15 @@ public class Song {
 	private String name;
 	@ManyToOne
 	private Album album;
+	@ElementCollection
+	private List<Comment> comments;
 	
 	protected Song() {}
 	
 	public Song(String name, Album album) {
 		this.name = name;	
 		this.album = album;
+		comments = new ArrayList<>();
 	}
 
 	
@@ -33,6 +40,14 @@ public class Song {
 	
 	public Album getAlbum() {
 		return album;
+	}
+	
+	public void addComment(Comment comment) {
+		comments.add(comment);
+	}
+	
+	public List<Comment> getComments() {
+		return comments;
 	}
 
 	@Override
@@ -71,5 +86,6 @@ public class Song {
 			return false;
 		return true;
 	}
+
 	
 }
