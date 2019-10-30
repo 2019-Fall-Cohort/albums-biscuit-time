@@ -28,7 +28,7 @@ public class SongControllerTest {
 	private SongController underTest;
 
 	@Mock
-	private SongRepository songRepo;
+	private SongService songService;
 
 	private MockMvc mockMvc;
 	
@@ -47,14 +47,14 @@ public class SongControllerTest {
 	
 	@Test
 	public void fetchAllReturnsListOfSongs() throws Exception {
-		when(songRepo.findAll()).thenReturn(Collections.singletonList(testSong));
+		when(songService.findAllSongs()).thenReturn(Collections.singletonList(testSong));
 		List<Song> retrievedSongs = underTest.fetchAll();
 		assertThat(retrievedSongs, contains(testSong));
 	}
 	
 	@Test
 	public void fetchAllIsMappedCorrectlyAndReturnsAJsonList() throws Exception {
-		when(songRepo.findAll()).thenReturn(Collections.singletonList(testSong));
+		when(songService.findAllSongs()).thenReturn(Collections.singletonList(testSong));
 		mockMvc.perform(get("/api/songs"))
 		       .andDo(print())
 		       .andExpect(status().isOk())
@@ -64,14 +64,14 @@ public class SongControllerTest {
 	
 	@Test
 	public void fetchByIdReturnsSingleSong() {
-		when(songRepo.findById(1L)).thenReturn(Optional.of(testSong));
+		when(songService.findSong(1L)).thenReturn(testSong);
 		Song retrievedSong = underTest.fetchById(1L);
 		assertThat(retrievedSong, is(testSong));
 	}
 	
 	@Test
 	public void fetchByIdIsMappedCorrectlyAndReturnsAJsonSong() throws Exception {
-		when(songRepo.findById(1L)).thenReturn(Optional.of(testSong));
+		when(songService.findSong(1L)).thenReturn(testSong);
 		mockMvc.perform(get("/api/songs/1"))
 			   .andDo(print())
 		       .andExpect(status().isOk())

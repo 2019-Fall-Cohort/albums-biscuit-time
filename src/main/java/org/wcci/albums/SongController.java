@@ -11,16 +11,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/songs")
 public class SongController {
 	
-	private SongRepository songRepo;
+	private SongService songService;
 
 	@GetMapping("")
 	public List<Song> fetchAll() {
-		return (List<Song>) songRepo.findAll();
+		return (List<Song>) songService.findAllSongs();
 	}
 
 	@GetMapping("/{id}")
 	public Song fetchById(@PathVariable Long id) {
-		return songRepo.findById(id).get();
+		return songService.findSong(id);
 	}
 
 }
