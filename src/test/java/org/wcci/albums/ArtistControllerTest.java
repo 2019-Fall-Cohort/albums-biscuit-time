@@ -61,6 +61,13 @@ public class ArtistControllerTest {
 		       .andExpect(jsonPath("$[0].name", is(equalTo("Jane"))));
 	}
 	
+	@Test
+	public void fetchByArtistIsMappedCorrectlyandReturnsAJsonArtist() throws Exception{
+		when(artistService.fetchArtist(1L)).thenReturn(testArtist);
+		
+		
+	}
+	
 	
 
 }
