@@ -86,4 +86,40 @@ public class JpaWiringTest {
         assertThat(retrievedArtist.getComments(), contains(testComment));
     }
 	
+	@Test
+    public void albumsCanHaveComments() throws Exception {
+		Artist testArtist = new Artist("Ben");
+		Album testAlbum = new Album("Greatest Hits", testArtist);
+        Comment testComment = new Comment("This is an amazing comment!", "BOB");
+        
+        testArtist = artistRepo.save(testArtist);
+        testAlbum = albumRepo.save(testAlbum);
+        testAlbum.addComment(testComment);
+        
+        entityManager.flush();
+        entityManager.clear();
+        
+        Album retrievedAlbum = albumRepo.findById(testAlbum.getId()).get();
+        assertThat(retrievedAlbum.getComments(), contains(testComment));
+    }
+	
+	@Test
+    public void songsCanHaveComments() throws Exception {
+		Artist testArtist = new Artist("Ben");
+		Album testAlbum = new Album("Greatest Hits", testArtist);
+		Song testSong = new Song("Biscuit Time", testAlbum);
+        Comment testComment = new Comment("This is an amazing comment!", "BOB");
+        
+        testArtist = artistRepo.save(testArtist);
+        testAlbum = albumRepo.save(testAlbum);
+        testSong = songRepo.save(testSong);
+        testSong.addComment(testComment);
+        
+        entityManager.flush();
+        entityManager.clear();
+        
+        Song retrievedSong = songRepo.findById(testSong.getId()).get();
+        assertThat(retrievedSong.getComments(), contains(testComment));
+    }
+	
 }
