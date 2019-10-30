@@ -6,16 +6,16 @@ import org.springframework.stereotype.Repository;
 import org.wcci.albums.models.Artist;
 import org.wcci.albums.repositories.ArtistRepository;
 
-@Repository
+@Service
 public class ArtistService {
 	
 	@Autowired
 	ArtistRepository artistRepo;
 	
-	
-	
-	public void addArtist(Artist artistToAdd) {
-		artistRepo.save(artistToAdd);
+
+	public Artist addArtist(Artist artistToAdd) {
+		return artistRepo.save(artistToAdd);
+
 	}
 
 	public Artist findArtist(Long id) {
