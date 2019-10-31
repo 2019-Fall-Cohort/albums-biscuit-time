@@ -1,4 +1,4 @@
-package org.wcci.albums;
+package org.wcci.albums.models;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,8 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
-import org.wcci.albums.models.Artist;
-
 @Entity
 public class Tag {
 	@Id
@@ -18,6 +16,10 @@ public class Tag {
 	private String name;
 	@ManyToMany
 	private List<Artist> artists;
+	@ManyToMany
+	private List<Album> albums;
+	@ManyToMany
+	private List<Song> songs;
 
 	protected Tag() {
 	}
@@ -26,11 +28,25 @@ public class Tag {
 		this.name = name;
 	}
 
-	public void addArtist(Artist artistToAdd) {
+	public void addArtist(Artist artist) {
 		if (artists == null) {
 			artists = new ArrayList<>();
 		}
-		artists.add(artistToAdd);
+		artists.add(artist);
+	}
+
+	public void addAlbum(Album album) {
+		if (albums == null) {
+			albums = new ArrayList<>();
+		}
+		albums.add(album);
+	}
+
+	public void addSong(Song song) {
+		if (songs == null) {
+			songs = new ArrayList<>();
+		}
+		songs.add(song);
 	}
 
 }

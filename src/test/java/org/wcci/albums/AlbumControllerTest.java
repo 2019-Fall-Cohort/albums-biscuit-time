@@ -5,6 +5,8 @@ import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.core.Is.is;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -30,18 +32,22 @@ import org.wcci.albums.controllers.AlbumController;
 import org.wcci.albums.models.Album;
 import org.wcci.albums.models.Artist;
 import org.wcci.albums.models.Comment;
+import org.wcci.albums.models.Tag;
+import org.wcci.albums.repositories.TagRepository;
 import org.wcci.albums.services.AlbumService;
 
 public class AlbumControllerTest {
-
 	@InjectMocks
 	private AlbumController underTest;
 
 	@Mock
 	private AlbumService albumService;
+	@Mock
+	private TagRepository tagRepo;
 
-	private Album testAlbum;
 	private MockMvc mockMvc;
+	
+	private Album testAlbum;
 
 	@Before
 	public void setup() {
@@ -90,6 +96,16 @@ public class AlbumControllerTest {
 		Comment testComment = new Comment("TESTING", "TESTY");
 		Album commentedOnAlbum = underTest.addComment(1L, testComment);
 		assertThat(commentedOnAlbum.getComments(), contains(testComment));
+	}
+	
+	@Test
+	public void addTagToAlbum() throws Exception {
+		when(albumService.fetchAlbum(1L)).thenReturn(testAlbum);
+		Tag utTag = new Tag("Test Tag");
+		underTest.addTag(1L, utTag);
+		utTag.addAlbum(testAlbum);
+		verify(tagRepo).save(utTag);
+		verify(albumService, times(2)).fetchAlbum(1L);
 	}
 
 }

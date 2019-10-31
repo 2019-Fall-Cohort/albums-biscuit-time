@@ -15,6 +15,7 @@ import org.wcci.albums.models.Album;
 import org.wcci.albums.models.Artist;
 import org.wcci.albums.models.Comment;
 import org.wcci.albums.models.Song;
+import org.wcci.albums.models.Tag;
 import org.wcci.albums.repositories.AlbumRepository;
 import org.wcci.albums.repositories.ArtistRepository;
 import org.wcci.albums.repositories.SongRepository;
@@ -118,6 +119,22 @@ public class JpaWiringTest {
 
 		Song retrievedSong = songRepo.findById(testSong.getId()).get();
 		assertThat(retrievedSong.getComments(), contains(testComment));
+	}
+	
+	@Test
+	public void albumsCanHaveTags() throws Exception {
+		Artist testArtist = new Artist("Ben");
+		Album testAlbum = new Album("Greatest Hits", testArtist);
+		testArtist = artistRepo.save(testArtist);
+		testAlbum = albumRepo.save(testAlbum);
+		Tag testTag = new Tag("fantastico");
+		testAlbum.addTag(testTag);
+
+		entityManager.flush();
+		entityManager.clear();
+
+		Album retrievedAlbum = albumRepo.findById(testAlbum.getId()).get();
+		assertThat(retrievedAlbum.getTags(), contains(testTag));
 	}
 
 }
