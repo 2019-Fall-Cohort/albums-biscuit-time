@@ -16,7 +16,7 @@ import org.wcci.albums.services.AlbumService;
 @RestController
 @RequestMapping("/api/albums")
 public class AlbumController {
-	
+
 	@Autowired
 	private AlbumService albumService;
 

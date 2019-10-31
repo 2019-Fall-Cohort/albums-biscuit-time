@@ -26,40 +26,36 @@ public class ArtistController {
 	private ArtistService artistService;
 	@Autowired
 	private TagRepository tagRepo;
-	
-	
+
 	@GetMapping("")
 	public List<Artist> fetchAll() {
-		return (List<Artist>) artistService.fetchAllArtists();
+		return artistService.fetchAllArtists();
 	}
-	
 
 	@PostMapping("")
-	public Artist addArtist(@RequestBody Artist artistToAdd) {
-		return artistService.saveArtist(artistToAdd);
+	public Artist addArtist(@RequestBody Artist artist) {
+		return artistService.saveArtist(artist);
 	}
 
-	@PatchMapping("/{id}/addTag")
-	public Artist addTag(@PathVariable Long id,@RequestBody Tag tagToAdd) {
-		Artist artistToAdd = artistService.fetchArtist(id);
-		tagToAdd.addArtist(artistToAdd);
-		tagRepo.save(tagToAdd);
+	@PatchMapping("/{id}/add-tag")
+	public Artist addTag(@PathVariable Long id, @RequestBody Tag tag) {
+		Artist artist = artistService.fetchArtist(id);
+		tag.addArtist(artist);
+		tagRepo.save(tag);
 		return artistService.fetchArtist(id);
 	}
 
 	@GetMapping("/{id}")
 	public Artist fetchById(@PathVariable long id) {
 		return artistService.fetchArtist(id);
-		
+
 	}
-	
+
 	@PatchMapping("/{id}/add-comment")
 	public Artist addComment(@PathVariable long id, @RequestBody Comment comment) {
 		Artist artist = artistService.fetchArtist(id);
 		artist.addComment(comment);
 		return artistService.saveArtist(artist);
 	}
-	
-	
 
 }

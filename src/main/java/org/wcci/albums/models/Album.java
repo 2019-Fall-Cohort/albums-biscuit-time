@@ -22,7 +22,7 @@ public class Album {
 	@JsonIgnore
 	@ManyToOne
 	private Artist artist;
-	@OneToMany(mappedBy ="album")
+	@OneToMany(mappedBy = "album")
 	private List<Song> songs;
 	@ElementCollection
 	private List<Comment> comments;
@@ -52,12 +52,12 @@ public class Album {
 	public List<Song> getSongs() {
 		return songs;
 	}
-	
+
 	public void addComment(Comment comment) {
 		comments.add(comment);
-		
+
 	}
-	
+
 	public List<Comment> getComments() {
 		return comments;
 	}
@@ -72,7 +72,6 @@ public class Album {
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
 	}
-	
 
 	@Override
 	public boolean equals(Object obj) {
@@ -106,5 +105,4 @@ public class Album {
 		return "Album [id=" + id + ", title=" + title + ", artist=" + artist + "]";
 	}
 
-	
 }

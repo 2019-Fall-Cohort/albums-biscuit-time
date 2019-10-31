@@ -9,25 +9,20 @@ import org.wcci.albums.repositories.AlbumRepository;
 
 @Service
 public class AlbumService {
-	
+
 	@Autowired
 	AlbumRepository albumRepo;
-	
+
 	public Album saveAlbum(Album album) {
 		return albumRepo.save(album);
 	}
 
 	public Album fetchAlbum(Long id) {
 		return albumRepo.findById(id).get();
-    }
-	
+	}
+
 	public List<Album> fetchAllAlbums() {
 		return (List<Album>) albumRepo.findAll();
 	}
 
-	}
-	
-	
-	
-
-
+}

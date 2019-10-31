@@ -1,6 +1,5 @@
 package org.wcci.albums.services;
 
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +9,9 @@ import org.wcci.albums.repositories.ArtistRepository;
 
 @Service
 public class ArtistService {
-	
+
 	@Autowired
 	ArtistRepository artistRepo;
-	
 
 	public Artist saveArtist(Artist artist) {
 		return artistRepo.save(artist);
@@ -28,5 +26,4 @@ public class ArtistService {
 		return (List<Artist>) artistRepo.findAll();
 	}
 
-	
 }
