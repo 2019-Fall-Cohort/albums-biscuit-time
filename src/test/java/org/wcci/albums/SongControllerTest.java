@@ -5,6 +5,8 @@ import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.core.Is.is;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -27,6 +29,8 @@ import org.wcci.albums.models.Album;
 import org.wcci.albums.models.Artist;
 import org.wcci.albums.models.Comment;
 import org.wcci.albums.models.Song;
+import org.wcci.albums.models.Tag;
+import org.wcci.albums.repositories.TagRepository;
 import org.wcci.albums.services.SongService;
 
 public class SongControllerTest {
@@ -35,11 +39,12 @@ public class SongControllerTest {
 
 	@Mock
 	private SongService songService;
+	@Mock
+	private TagRepository tagRepo;
 
 	private MockMvc mockMvc;
 
 	private Song testSong;
-
 	private Album testAlbum;
 
 	@Before
@@ -94,4 +99,13 @@ public class SongControllerTest {
 		assertThat(commentedOnSong.getComments(), contains(testComment));
 	}
 
+	@Test
+	public void addTagToSong() throws Exception {
+		when(songService.fetchSong(1L)).thenReturn(testSong);
+		Tag utTag = new Tag("Test Tag");
+		underTest.addTag(1L, utTag);
+		utTag.addSong(testSong);
+		verify(tagRepo).save(utTag);
+		verify(songService, times(2)).fetchSong(1L);
+	}
 }
