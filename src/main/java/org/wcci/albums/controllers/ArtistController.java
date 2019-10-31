@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.wcci.albums.Tag;
-import org.wcci.albums.TagRepository;
 import org.wcci.albums.models.Artist;
 import org.wcci.albums.models.Comment;
+import org.wcci.albums.models.Tag;
+import org.wcci.albums.repositories.TagRepository;
 import org.wcci.albums.services.ArtistService;
 
 @RestController
