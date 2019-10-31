@@ -46,7 +46,7 @@ public class ArtistController {
 	}
 
 	@GetMapping("/{id}")
-	public Artist fetchById(@PathVariable long id) {
+	public Artist fetchArtist(@PathVariable long id) {
 		return artistService.fetchArtist(id);
 
 	}
