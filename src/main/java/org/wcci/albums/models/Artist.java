@@ -47,6 +47,10 @@ public class Artist {
 		return comments;
 	}
 
+	public List<Tag> getTags() {
+		return tags;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -83,5 +87,7 @@ public class Artist {
 	public String toString() {
 		return "Artist [id=" + id + ", name=" + name + "]";
 	}
+
+	
 
 }
