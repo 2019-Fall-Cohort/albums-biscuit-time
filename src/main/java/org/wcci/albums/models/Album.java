@@ -26,6 +26,8 @@ public class Album {
 	private List<Song> songs;
 	@ElementCollection
 	private List<Comment> comments;
+	@ElementCollection
+	private List<Tag> tags;
 
 	protected Album() {
 	}
@@ -55,13 +57,22 @@ public class Album {
 
 	public void addComment(Comment comment) {
 		comments.add(comment);
-
 	}
 
 	public List<Comment> getComments() {
 		return comments;
 	}
+	
+	public void addTag(Tag tag) {
+		tags.add(tag);
+	}
 
+	public List<Tag> getTags() {
+		
+		
+		return tags;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -104,5 +115,8 @@ public class Album {
 	public String toString() {
 		return "Album [id=" + id + ", title=" + title + ", artist=" + artist + "]";
 	}
+
+
+	
 
 }
