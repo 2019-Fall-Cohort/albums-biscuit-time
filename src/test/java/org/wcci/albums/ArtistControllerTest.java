@@ -23,6 +23,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.wcci.albums.controllers.ArtistController;
 import org.wcci.albums.models.Artist;
 import org.wcci.albums.models.Comment;
+import org.wcci.albums.models.Tag;
+import org.wcci.albums.repositories.TagRepository;
 import org.wcci.albums.services.ArtistService;
 
 public class ArtistControllerTest {
@@ -74,7 +76,6 @@ public class ArtistControllerTest {
 		       .andExpect(status().isOk())
 			   .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 			   .andExpect(jsonPath("$.name", is(equalTo("Luke"))));
-
 	}
 
 	@Test
@@ -90,7 +91,6 @@ public class ArtistControllerTest {
 	public void addCommentToArtistMappingWorks() throws Exception {
 		when(artistService.fetchArtist(1L)).thenReturn(testArtist);
 		when(artistService.saveArtist(testArtist)).thenReturn(testArtist);
-
 	}
 
 	@Test
