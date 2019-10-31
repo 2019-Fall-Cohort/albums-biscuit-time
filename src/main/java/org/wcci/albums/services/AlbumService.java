@@ -23,7 +23,7 @@ public class AlbumService {
 
 	public Album fetchAlbum(Long id) {
 		Optional<Album> retrievedAlbumOptional = albumRepo.findById(id);
-		if (retrievedAlbumOptional.isEmpty()) {
+		if (!retrievedAlbumOptional.isPresent()) {
 			throw new AlbumNotFoundException("Album not found.");
 		}
 		return retrievedAlbumOptional.get();

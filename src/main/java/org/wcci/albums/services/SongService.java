@@ -23,7 +23,7 @@ public class SongService {
 
 	public Song fetchSong(Long id) {
 		Optional<Song> retrievedAlbumOptional = songRepo.findById(id);
-		if (retrievedAlbumOptional.isEmpty()) {
+		if (!retrievedAlbumOptional.isPresent()) {
 			throw new SongNotFoundException("Song not found.");
 		}
 		return retrievedAlbumOptional.get();

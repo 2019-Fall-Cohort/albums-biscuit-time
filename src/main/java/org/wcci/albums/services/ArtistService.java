@@ -22,7 +22,7 @@ public class ArtistService {
 
 	public Artist fetchArtist(Long id)  {
 		Optional<Artist> retrievedArtistOptional = artistRepo.findById(id);
-		if (retrievedArtistOptional.isEmpty()) {
+		if (!retrievedArtistOptional.isPresent()) {
 			throw new ArtistNotFoundException("Artist not found.");
 		}
 		return retrievedArtistOptional.get();
