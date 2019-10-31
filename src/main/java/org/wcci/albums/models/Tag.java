@@ -18,6 +18,8 @@ public class Tag {
 	private List<Artist> artists;
 	@ManyToMany
 	private List<Album> albums;
+	@ManyToMany
+	private List<Song> songs;
 
 	protected Tag() {
 	}
@@ -38,6 +40,13 @@ public class Tag {
 			albums = new ArrayList<>();
 		}
 		albums.add(album);
+	}
+
+	public void addSong(Song song) {
+		if (songs == null) {
+			songs = new ArrayList<>();
+		}
+		songs.add(song);
 	}
 
 }

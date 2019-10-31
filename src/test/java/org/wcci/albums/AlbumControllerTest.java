@@ -37,7 +37,6 @@ import org.wcci.albums.repositories.TagRepository;
 import org.wcci.albums.services.AlbumService;
 
 public class AlbumControllerTest {
-
 	@InjectMocks
 	private AlbumController underTest;
 
@@ -46,9 +45,9 @@ public class AlbumControllerTest {
 	@Mock
 	private TagRepository tagRepo;
 
-	private Album testAlbum;
 	private MockMvc mockMvc;
-
+	
+	private Album testAlbum;
 
 	@Before
 	public void setup() {
