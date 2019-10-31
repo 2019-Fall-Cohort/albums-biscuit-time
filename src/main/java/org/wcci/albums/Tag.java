@@ -18,15 +18,16 @@ public class Tag {
 	private String name;
 	@ManyToMany
 	private List<Artist> artists;
-	
-	protected Tag() {}
-	
+
+	protected Tag() {
+	}
+
 	public Tag(String name) {
 		this.name = name;
 	}
 
 	public void addArtist(Artist artistToAdd) {
-		if(artists == null) {
+		if (artists == null) {
 			artists = new ArrayList<>();
 		}
 		artists.add(artistToAdd);

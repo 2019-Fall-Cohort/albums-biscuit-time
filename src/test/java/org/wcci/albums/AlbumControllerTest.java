@@ -32,7 +32,6 @@ import org.wcci.albums.models.Artist;
 import org.wcci.albums.models.Comment;
 import org.wcci.albums.services.AlbumService;
 
-
 public class AlbumControllerTest {
 
 	@InjectMocks
@@ -61,11 +60,9 @@ public class AlbumControllerTest {
 	@Test
 	public void fetchAllIsMappedCorrectlyAndReturnsAJsonList() throws Exception {
 		when(albumService.fetchAllAlbums()).thenReturn(Collections.singletonList(testAlbum));
-		mockMvc.perform(get("/api/albums"))
-		       .andDo(print())
-		       .andExpect(status().isOk())
-			   .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8)).andExpect(jsonPath("$", hasSize(1)))
-			   .andExpect(jsonPath("$[0].title", is(equalTo("testAlbum"))));
+		mockMvc.perform(get("/api/albums")).andDo(print()).andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8)).andExpect(jsonPath("$", hasSize(1)))
+				.andExpect(jsonPath("$[0].title", is(equalTo("testAlbum"))));
 	}
 
 	@Test
@@ -80,19 +77,19 @@ public class AlbumControllerTest {
 		when(albumService.fetchAlbum(1L)).thenReturn(testAlbum);
 		mockMvc.perform(get("/api/albums/1"))
 			   .andDo(print())
-		       .andExpect(status().isOk())
+			   .andExpect(status().isOk())
 			   .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 			   .andExpect(jsonPath("$.title", is(equalTo("testAlbum"))));
 
 	}
-	
+
 	@Test
-    public void addCommentAddsCommentsToSelectedAlbum() {
-        when(albumService.fetchAlbum(1L)).thenReturn(testAlbum);
-        when(albumService.saveAlbum(testAlbum)).thenReturn(testAlbum);
-        Comment testComment = new Comment("TESTING", "TESTY");
-        Album commentedOnAlbum = underTest.addComment(1L, testComment);
-        assertThat(commentedOnAlbum.getComments(), contains(testComment));
-    }
-	
+	public void addCommentAddsCommentsToSelectedAlbum() {
+		when(albumService.fetchAlbum(1L)).thenReturn(testAlbum);
+		when(albumService.saveAlbum(testAlbum)).thenReturn(testAlbum);
+		Comment testComment = new Comment("TESTING", "TESTY");
+		Album commentedOnAlbum = underTest.addComment(1L, testComment);
+		assertThat(commentedOnAlbum.getComments(), contains(testComment));
+	}
+
 }

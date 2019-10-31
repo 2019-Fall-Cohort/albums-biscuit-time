@@ -6,8 +6,9 @@ import javax.persistence.Embeddable;
 public class Comment {
 	private String content;
 	private String author;
-	
-	protected Comment (){}
+
+	protected Comment() {
+	}
 
 	public Comment(String content, String author) {
 		this.content = content;
@@ -57,5 +58,5 @@ public class Comment {
 	public String toString() {
 		return "Comment [content=" + content + ", author=" + author + "]";
 	}
-	
+
 }

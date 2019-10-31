@@ -37,11 +37,10 @@ public class SongControllerTest {
 	private SongService songService;
 
 	private MockMvc mockMvc;
-	
+
 	private Song testSong;
 
 	private Album testAlbum;
-	
 
 	@Before
 	public void setup() {
@@ -50,49 +49,49 @@ public class SongControllerTest {
 		testAlbum = new Album("testAlbum", new Artist("Jane"));
 		testSong = new Song("testSong", testAlbum);
 	}
-	
+
 	@Test
 	public void fetchAllReturnsListOfSongs() throws Exception {
 		when(songService.fetchAllSongs()).thenReturn(Collections.singletonList(testSong));
 		List<Song> retrievedSongs = underTest.fetchAll();
 		assertThat(retrievedSongs, contains(testSong));
 	}
-	
+
 	@Test
 	public void fetchAllIsMappedCorrectlyAndReturnsAJsonList() throws Exception {
 		when(songService.fetchAllSongs()).thenReturn(Collections.singletonList(testSong));
 		mockMvc.perform(get("/api/songs"))
 		       .andDo(print())
 		       .andExpect(status().isOk())
-			   .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8)).andExpect(jsonPath("$", hasSize(1)))
+			   .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8)) 
+			   .andExpect(jsonPath("$", hasSize(1)))
 			   .andExpect(jsonPath("$[0].name", is(equalTo("testSong"))));
 	}
-	
+
 	@Test
 	public void fetchByIdReturnsSingleSong() {
 		when(songService.fetchSong(1L)).thenReturn(testSong);
 		Song retrievedSong = underTest.fetchById(1L);
 		assertThat(retrievedSong, is(testSong));
 	}
-	
+
 	@Test
 	public void fetchByIdIsMappedCorrectlyAndReturnsAJsonSong() throws Exception {
 		when(songService.fetchSong(1L)).thenReturn(testSong);
 		mockMvc.perform(get("/api/songs/1"))
-			   .andDo(print())
+		       .andDo(print())
 		       .andExpect(status().isOk())
 			   .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
 			   .andExpect(jsonPath("$.name", is(equalTo("testSong"))));
 	}
-	
+
 	@Test
-    public void addCommentAddsCommentsToSelectedSong() {
-        when(songService.fetchSong(1L)).thenReturn(testSong);
-        when(songService.saveSong(testSong)).thenReturn(testSong);
-        Comment testComment = new Comment("TESTING", "TESTY");
-        Song commentedOnSong = underTest.addComment(1L, testComment);
-        assertThat(commentedOnSong.getComments(), contains(testComment));
-    }
-	
-	
+	public void addCommentAddsCommentsToSelectedSong() {
+		when(songService.fetchSong(1L)).thenReturn(testSong);
+		when(songService.saveSong(testSong)).thenReturn(testSong);
+		Comment testComment = new Comment("TESTING", "TESTY");
+		Song commentedOnSong = underTest.addComment(1L, testComment);
+		assertThat(commentedOnSong.getComments(), contains(testComment));
+	}
+
 }

@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Song {
-	
+
 	@Id
 	@GeneratedValue
 	private Long id;
@@ -20,16 +20,16 @@ public class Song {
 	private Album album;
 	@ElementCollection
 	private List<Comment> comments;
-	
-	protected Song() {}
-	
+
+	protected Song() {
+	}
+
 	public Song(String name, Album album) {
-		this.name = name;	
+		this.name = name;
 		this.album = album;
 		comments = new ArrayList<>();
 	}
 
-	
 	public String getName() {
 		return name;
 	}
@@ -37,15 +37,15 @@ public class Song {
 	public Long getId() {
 		return id;
 	}
-	
+
 	public Album getAlbum() {
 		return album;
 	}
-	
+
 	public void addComment(Comment comment) {
 		comments.add(comment);
 	}
-	
+
 	public List<Comment> getComments() {
 		return comments;
 	}
@@ -87,5 +87,4 @@ public class Song {
 		return true;
 	}
 
-	
 }

@@ -6,26 +6,26 @@ import javax.persistence.*;
 
 import org.wcci.albums.Tag;
 
-
-
 @Entity
 public class Artist {
-	
+
 	@Id
 	@GeneratedValue
 	private Long id;
 	private String name;
-	@OneToMany(mappedBy="artist")
+	@OneToMany(mappedBy = "artist")
 	private List<Album> albums;
 	@ElementCollection
 	private List<Comment> comments;
-	@ManyToMany(mappedBy="artists")
+	@ManyToMany(mappedBy = "artists")
 	private List<Tag> tags;
 
-	protected Artist() {}
-	
+	protected Artist() {
+	}
+
 	public Artist(String name) {
-		this.name = name;;
+		this.name = name;
+		;
 		comments = new ArrayList<>();
 	}
 
@@ -40,15 +40,14 @@ public class Artist {
 	public List<Album> getAlbums() {
 		return albums;
 	}
-	
+
 	public void addComment(Comment comment) {
-		comments.add(comment);	
+		comments.add(comment);
 	}
-		
+
 	public List<Comment> getComments() {
 		return comments;
 	}
-	
 
 	@Override
 	public int hashCode() {
@@ -87,5 +86,4 @@ public class Artist {
 		return "Artist [id=" + id + ", name=" + name + "]";
 	}
 
-	
 }
