@@ -6,10 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import org.wcci.albums.models.Album;
+
+import org.wcci.albums.models.Artist;
+
 import org.wcci.albums.models.Comment;
 import org.wcci.albums.models.Song;
 import org.wcci.albums.models.Tag;
@@ -28,6 +33,11 @@ public class SongController {
 	@GetMapping("")
 	public List<Song> fetchAll() {
 		return songService.fetchAllSongs();
+	}
+	
+	@PostMapping("")
+	public Song addSong(@RequestBody Song song) {
+		return songService.saveSong(song);
 	}
 
 	@GetMapping("/{id}")
