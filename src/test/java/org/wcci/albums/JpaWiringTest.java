@@ -126,18 +126,21 @@ public class JpaWiringTest {
 	}
 	
 	@Test
-	public void albumsAndArtistsCanHaveTags() throws Exception {
+	public void albumsAndArtistsAndSongsCanHaveTags() throws Exception {
 		Artist testArtist = new Artist("Ben");
 		Album testAlbum = new Album("Greatest Hits", testArtist);
+		Song testSong = new Song("Biscuit Time", testAlbum);
 		
 		testArtist = artistRepo.save(testArtist);
 		testAlbum = albumRepo.save(testAlbum);
+		testSong = songRepo.save(testSong);
 		
 		Tag testTag = new Tag("fantastico");
 		
 		testTag = tagRepo.save(testTag);
 		testTag.addAlbum(testAlbum);
 		testTag.addArtist(testArtist);
+		testTag.addSong(testSong);
 		testTag = tagRepo.save(testTag);
 
 		entityManager.flush();
@@ -146,9 +149,11 @@ public class JpaWiringTest {
 		Tag retrievedTag = tagRepo.findById(testTag.getId()).get();
 		Album retrievedAlbum = albumRepo.findById(testAlbum.getId()).get();
 		Artist retrievedArtist = artistRepo.findById(testArtist.getId()).get();
+		Song retrievedSong = songRepo.findById(testSong.getId()).get();
 		
 		assertThat(retrievedArtist.getTags(), contains(retrievedTag));
 		assertThat(retrievedAlbum.getTags(), contains(retrievedTag));
+		assertThat(retrievedSong.getTags(), contains(retrievedTag));
 	}
 
 }
