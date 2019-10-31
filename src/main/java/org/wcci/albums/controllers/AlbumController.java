@@ -26,7 +26,7 @@ public class AlbumController {
 	}
 
 	@GetMapping("/{id}")
-	public Album fetchById(@PathVariable Long id) {
+	public Album fetchAlbum(@PathVariable Long id) {
 		return albumService.fetchAlbum(id);
 	}
 

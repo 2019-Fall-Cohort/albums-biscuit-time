@@ -68,7 +68,7 @@ public class AlbumControllerTest {
 	@Test
 	public void fetchByIdReturnsSingleAlbum() {
 		when(albumService.fetchAlbum(1L)).thenReturn(testAlbum);
-		Album retrievedAlbum = underTest.fetchById(1L);
+		Album retrievedAlbum = underTest.fetchAlbum(1L);
 		assertThat(retrievedAlbum, is(testAlbum));
 	}
 

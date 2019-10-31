@@ -116,14 +116,5 @@ public class ArtistControllerTest {
 		verify(artistService, times(2)).fetchArtist(1L);
 	}
 	
-	@Test
-    public void shouldThrowNotFoundExceptionWhenArtistDoesntExist() {
-    	 when(artistRepo.findById(1L)).thenReturn(Optional.empty());
-    	 try {
-    		 underTest.fetchArtist(1L);
-    		 fail("Exception not thrown");
-    	 }catch (ArtistNotFoundException e) {
-    		 assertThat(e.getMessage(), is(equalTo("Artist not found.")));
-    	 }
-    }
+	
 }
