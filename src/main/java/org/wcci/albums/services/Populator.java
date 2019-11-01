@@ -7,9 +7,11 @@ import org.springframework.stereotype.Component;
 import org.wcci.albums.models.Album;
 import org.wcci.albums.models.Artist;
 import org.wcci.albums.models.Song;
+import org.wcci.albums.models.Tag;
 import org.wcci.albums.repositories.AlbumRepository;
 import org.wcci.albums.repositories.ArtistRepository;
 import org.wcci.albums.repositories.SongRepository;
+import org.wcci.albums.repositories.TagRepository;
 @Component
 public class Populator implements CommandLineRunner{
 	
@@ -19,11 +21,12 @@ public class Populator implements CommandLineRunner{
 	private AlbumRepository albumRepo;
 	@Autowired
 	private SongRepository songRepo;
-//	@Autowired
-//	private TagService tagService;
+	@Autowired
+	private TagRepository tagRepo;
 	
 	@Override
 	public void run(String... args) throws Exception {
+		
 		Artist artist = new Artist("David Bowie");
 		artistRepo.save(artist);
 
@@ -35,6 +38,11 @@ public class Populator implements CommandLineRunner{
 		songRepo.save(song);
 		songRepo.save(song2);
 		
+		Tag tag = new Tag("Glam");
+		Tag tag2 = new Tag("Funky");
+		
+		tagRepo.save(tag);
+		tagRepo.save(tag2);
 		
 	}
 	
