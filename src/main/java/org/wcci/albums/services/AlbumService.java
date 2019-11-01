@@ -6,9 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.wcci.albums.AlbumNotFoundException;
-import org.wcci.albums.ArtistNotFoundException;
 import org.wcci.albums.models.Album;
-import org.wcci.albums.models.Artist;
 import org.wcci.albums.repositories.AlbumRepository;
 
 @Service
@@ -28,7 +26,6 @@ public class AlbumService {
 		}
 		return retrievedAlbumOptional.get();
 	}
-	
 
 	public List<Album> fetchAllAlbums() {
 		return (List<Album>) albumRepo.findAll();

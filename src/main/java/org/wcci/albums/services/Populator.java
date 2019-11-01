@@ -1,7 +1,5 @@
 package org.wcci.albums.services;
 
-import java.util.Arrays;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -9,64 +7,36 @@ import org.springframework.stereotype.Component;
 import org.wcci.albums.models.Album;
 import org.wcci.albums.models.Artist;
 import org.wcci.albums.models.Song;
+import org.wcci.albums.repositories.AlbumRepository;
+import org.wcci.albums.repositories.ArtistRepository;
+import org.wcci.albums.repositories.SongRepository;
 @Component
 public class Populator implements CommandLineRunner{
 	
 	@Autowired
-	private ArtistService artistService;
+	private ArtistRepository artistRepo;
 	@Autowired
-	private AlbumService albumService;
+	private AlbumRepository albumRepo;
 	@Autowired
-	private SongService songService;
+	private SongRepository songRepo;
 //	@Autowired
 //	private TagService tagService;
 	
-	List<String> artists = Arrays.asList("Bob Dylan", "David Bowie");
-	List<String> albums = Arrays.asList("Blonde on Blonde", "Diamond Dogs");
-	List<String> songs = Arrays.asList("Rainy Day Woman", "Rebel Rebel");
-	List<String> tags = Arrays.asList("folk", "glam");
-
-
 	@Override
 	public void run(String... args) throws Exception {
-		generateArtist();
-		generateAlbum();
-		generateSong();
-//		generateTag();
-	}
-//private void generateTag() {
-//		for (String tagName : tags) {
-//		Tag tag = new Tag(tagName);
-//		tagStorage.addTag(tag);
-//		
-//	}
-	private void generateArtist() {
-		for (String artistName : artists) {
-			Artist artist = new Artist(artistName);
-			artistService.saveArtist(artist);
-		}
-	}
-	
-	private void generateSong() {
-		for (String songName : songs) {
-			Album album = new Album(name, album );
-			Song song = new Song(songName,  );
-			songService.saveSong(song);
-		}
+		Artist artist = new Artist("David Bowie");
+		artistRepo.save(artist);
+
+		Album album = new Album("Diamond Dogs", artist);
+		albumRepo.save(album);
+		
+		Song song = new Song("Rebel Rebel", album);
+		Song song2 = new Song("Diamond Dogs", album);
+		songRepo.save(song);
+		songRepo.save(song2);
+		
 		
 	}
-	private void generateAlbum() {
-		for (String albumName : albums) {
-			
-			
-			Album album = new Album(albumName, artists);
-			albumService.saveAlbum(album);
-		}
-
-
-	
-	
-}
 	
 
 }
