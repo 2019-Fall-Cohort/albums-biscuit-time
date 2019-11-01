@@ -1,15 +1,23 @@
 package org.wcci.albums;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.core.Is.is;
-import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.junit.Assert.fail;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -24,6 +32,7 @@ import org.wcci.albums.controllers.ArtistController;
 import org.wcci.albums.models.Artist;
 import org.wcci.albums.models.Comment;
 import org.wcci.albums.models.Tag;
+import org.wcci.albums.repositories.ArtistRepository;
 import org.wcci.albums.repositories.TagRepository;
 import org.wcci.albums.services.ArtistService;
 
@@ -34,6 +43,10 @@ public class ArtistControllerTest {
 
 	@Mock
 	ArtistService artistService;
+	@Mock
+	private ArtistRepository artistRepo;
+	@Mock
+	private Artist mockArtist;
 	@Mock
 	TagRepository tagRepo;
 	private MockMvc mockMvc;
@@ -64,7 +77,7 @@ public class ArtistControllerTest {
 	@Test
 	public void fetchByIdReturnsSingleArtist() {
 		when(artistService.fetchArtist(1L)).thenReturn(testArtist);
-		Artist retrievedArtist = underTest.fetchById(1L);
+		Artist retrievedArtist = underTest.fetchArtist(1L);
 		assertThat(retrievedArtist, is(testArtist));
 	}
 
@@ -102,4 +115,6 @@ public class ArtistControllerTest {
 		verify(tagRepo).save(utTag);
 		verify(artistService, times(2)).fetchArtist(1L);
 	}
+	
+	
 }

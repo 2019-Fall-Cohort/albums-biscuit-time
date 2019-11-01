@@ -1,10 +1,14 @@
 package org.wcci.albums.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.wcci.albums.AlbumNotFoundException;
+import org.wcci.albums.ArtistNotFoundException;
 import org.wcci.albums.models.Album;
+import org.wcci.albums.models.Artist;
 import org.wcci.albums.repositories.AlbumRepository;
 
 @Service
@@ -18,8 +22,13 @@ public class AlbumService {
 	}
 
 	public Album fetchAlbum(Long id) {
-		return albumRepo.findById(id).get();
+		Optional<Album> retrievedAlbumOptional = albumRepo.findById(id);
+		if (!retrievedAlbumOptional.isPresent()) {
+			throw new AlbumNotFoundException("Album not found.");
+		}
+		return retrievedAlbumOptional.get();
 	}
+	
 
 	public List<Album> fetchAllAlbums() {
 		return (List<Album>) albumRepo.findAll();

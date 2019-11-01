@@ -7,6 +7,7 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -20,6 +21,8 @@ public class Song {
 	private Album album;
 	@ElementCollection
 	private List<Comment> comments;
+	@ManyToMany(mappedBy="songs")
+	private List<Tag> tags;
 
 	protected Song() {
 	}
@@ -49,7 +52,11 @@ public class Song {
 	public List<Comment> getComments() {
 		return comments;
 	}
-
+	
+	public List<Tag> getTags() {
+		return tags;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -86,5 +93,7 @@ public class Song {
 			return false;
 		return true;
 	}
+
+	
 
 }
