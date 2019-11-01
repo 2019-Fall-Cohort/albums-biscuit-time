@@ -27,7 +27,7 @@ public class Populator implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
-		Artist artist = new Artist("David Bowie");
+		Artist artist = new Artist("David Bowie", "image", "recordLabel", "homeTown");
 		artistRepo.save(artist);
 
 		Album album = new Album("Diamond Dogs", artist);

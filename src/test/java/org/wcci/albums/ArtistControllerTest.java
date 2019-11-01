@@ -55,7 +55,7 @@ public class ArtistControllerTest {
 	@Before
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
-		testArtist = new Artist("Jessika");
+		testArtist = new Artist("jane", "image", "record label", "hometown");
 		mockMvc = MockMvcBuilders.standaloneSetup(underTest).build();
 	}
 
@@ -71,7 +71,7 @@ public class ArtistControllerTest {
 		when(artistService.fetchAllArtists()).thenReturn(Collections.singletonList(testArtist));
 		mockMvc.perform(get("/api/artists")).andDo(print()).andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8)).andExpect(jsonPath("$", hasSize(1)))
-				.andExpect(jsonPath("$[0].name", is(equalTo("Jessika"))));
+				.andExpect(jsonPath("$[0].name", is(equalTo("jane"))));
 	}
 
 	@Test
@@ -88,7 +88,7 @@ public class ArtistControllerTest {
 		       .andDo(print())
 		       .andExpect(status().isOk())
 			   .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-			   .andExpect(jsonPath("$.name", is(equalTo("Luke"))));
+			   .andExpect(jsonPath("$.name", is(equalTo("jane"))));
 	}
 
 	@Test
