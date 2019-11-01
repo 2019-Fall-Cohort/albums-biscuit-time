@@ -1,4 +1,4 @@
-package org.wcci.albums.services;
+package org.wcci.albums;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
