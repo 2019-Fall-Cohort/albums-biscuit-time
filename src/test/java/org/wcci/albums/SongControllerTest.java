@@ -14,7 +14,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -51,7 +50,7 @@ public class SongControllerTest {
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
 		mockMvc = MockMvcBuilders.standaloneSetup(underTest).build();
-		testAlbum = new Album("testAlbum", new Artist("Jane"));
+		testAlbum = new Album("testAlbum", new Artist("jane", "image", "record label", "hometown"));
 		testSong = new Song("testSong", testAlbum);
 	}
 

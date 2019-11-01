@@ -1,5 +1,6 @@
 package org.wcci.albums.models;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
@@ -11,6 +12,9 @@ public class Artist {
 	@GeneratedValue
 	private Long id;
 	private String name;
+	private String imageUrl;
+	private String recordLabel;
+	private String homeTown;
 	@OneToMany(mappedBy = "artist")
 	private List<Album> albums;
 	@ElementCollection
@@ -21,9 +25,11 @@ public class Artist {
 	protected Artist() {
 	}
 
-	public Artist(String name) {
+	public Artist(String name, String imageUrl, String recordLabel, String homeTown) {
 		this.name = name;
-		;
+		this.imageUrl = imageUrl;
+		this.recordLabel = recordLabel;
+		this.homeTown = homeTown;
 		comments = new ArrayList<>();
 	}
 
@@ -86,6 +92,18 @@ public class Artist {
 	@Override
 	public String toString() {
 		return "Artist [id=" + id + ", name=" + name + "]";
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public String getRecordLabel() {
+		return recordLabel;
+	}
+
+	public String getHomeTown() {
+		return homeTown;
 	}
 
 	

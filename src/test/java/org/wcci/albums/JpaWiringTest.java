@@ -7,11 +7,13 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.wcci.albums.models.Album;
 import org.wcci.albums.models.Artist;
 import org.wcci.albums.models.Comment;
@@ -36,8 +38,10 @@ public class JpaWiringTest {
 	private TagRepository tagRepo;
 	@Autowired
 	private TestEntityManager entityManager;
-
-	Artist testArtist = new Artist("Ben");
+	
+	
+	
+	Artist testArtist = new Artist("jane", "image", "record label", "hometown");
 	Album testAlbum = new Album("Greatest Hits", testArtist);
 	Song testSong = new Song("Biscuit Time", testAlbum);
 
@@ -76,7 +80,7 @@ public class JpaWiringTest {
 
 	@Test
 	public void artistsCanHaveComments() throws Exception {
-		Artist testArtist = new Artist("Ben");
+		Artist testArtist = new Artist("jane", "image", "record label", "hometown");
 		Comment testComment = new Comment("This is an amazing comment!", "BOB");
 
 		testArtist.addComment(testComment);
@@ -91,7 +95,7 @@ public class JpaWiringTest {
 
 	@Test
 	public void albumsCanHaveComments() throws Exception {
-		Artist testArtist = new Artist("Ben");
+		Artist testArtist = new Artist("jane", "image", "record label", "hometown");
 		Album testAlbum = new Album("Greatest Hits", testArtist);
 		Comment testComment = new Comment("This is an amazing comment!", "BOB");
 
@@ -108,7 +112,7 @@ public class JpaWiringTest {
 
 	@Test
 	public void songsCanHaveComments() throws Exception {
-		Artist testArtist = new Artist("Ben");
+		Artist testArtist = new Artist("jane", "image", "record label", "hometown");
 		Album testAlbum = new Album("Greatest Hits", testArtist);
 		Song testSong = new Song("Biscuit Time", testAlbum);
 		Comment testComment = new Comment("This is an amazing comment!", "BOB");
@@ -127,7 +131,7 @@ public class JpaWiringTest {
 	
 	@Test
 	public void albumsAndArtistsAndSongsCanHaveTags() throws Exception {
-		Artist testArtist = new Artist("Ben");
+		Artist testArtist = new Artist("jane", "image", "record label", "hometown");
 		Album testAlbum = new Album("Greatest Hits", testArtist);
 		Song testSong = new Song("Biscuit Time", testAlbum);
 		

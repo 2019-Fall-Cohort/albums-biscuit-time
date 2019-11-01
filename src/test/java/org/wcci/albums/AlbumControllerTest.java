@@ -53,7 +53,7 @@ public class AlbumControllerTest {
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
 		mockMvc = MockMvcBuilders.standaloneSetup(underTest).build();
-		testAlbum = new Album("testAlbum", new Artist("Jane"));
+		testAlbum = new Album("testAlbum", new Artist("jane", "image", "record label", "hometown"));
 	}
 
 	@Test
