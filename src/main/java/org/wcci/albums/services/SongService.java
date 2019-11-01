@@ -5,9 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.wcci.albums.AlbumNotFoundException;
 import org.wcci.albums.SongNotFoundException;
-import org.wcci.albums.models.Album;
 import org.wcci.albums.models.Song;
 import org.wcci.albums.repositories.SongRepository;
 
