@@ -5,11 +5,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
 import org.wcci.albums.models.Album;
 import org.wcci.albums.models.Artist;
 import org.wcci.albums.models.Song;
-import org.wcci.blog.Tag;
-
+@Component
 public class Populator implements CommandLineRunner{
 	
 	@Autowired
@@ -40,24 +40,30 @@ public class Populator implements CommandLineRunner{
 //		tagStorage.addTag(tag);
 //		
 //	}
-private void generateSong() {
-	for (String songName : songs) {
-		Song song = new Song(songName, null);
-		songService.saveSong(song);
+	private void generateArtist() {
+		for (String artistName : artists) {
+			Artist artist = new Artist(artistName);
+			artistService.saveArtist(artist);
+		}
 	}
+	
+	private void generateSong() {
+		for (String songName : songs) {
+			Album album = new Album(name, album );
+			Song song = new Song(songName,  );
+			songService.saveSong(song);
+		}
 		
 	}
-private void generateAlbum() {
-	for (String albumName : albums) {
-		Album album = new Album(albumName, null);
-		albumService.saveAlbum(album);
-	}
-}
-private void generateArtist() {
-	for (String artistName : artists) {
-		Artist artist = new Artist(artistName);
-		artistService.saveArtist(artist);
-	}
+	private void generateAlbum() {
+		for (String albumName : albums) {
+			
+			
+			Album album = new Album(albumName, artists);
+			albumService.saveAlbum(album);
+		}
+
+
 	
 	
 }
