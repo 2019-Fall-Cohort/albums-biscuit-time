@@ -17,7 +17,6 @@ public class ArtistService {
 
 	public Artist saveArtist(Artist artist) {
 		return artistRepo.save(artist);
-
 	}
 
 	public Artist fetchArtist(Long id)  {
