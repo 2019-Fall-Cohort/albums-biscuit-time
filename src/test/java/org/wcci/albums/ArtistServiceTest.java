@@ -14,6 +14,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.wcci.albums.exceptions.ArtistNotFoundException;
 import org.wcci.albums.models.Artist;
 import org.wcci.albums.repositories.ArtistRepository;
 import org.wcci.albums.services.ArtistService;
