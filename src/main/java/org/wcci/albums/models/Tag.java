@@ -44,8 +44,8 @@ public class Tag {
 	public List<Artist> getArtists() {
 	        return artists;
 	    }
-	public List<Artist> getSongs() {
-	        return artists;
+	public List<Song> getSongs() {
+	        return songs;
 	    }
 	
 	public void addArtist(Artist artist) {

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.wcci.albums.models.Album;
 import org.wcci.albums.models.Artist;
+import org.wcci.albums.models.Song;
 import org.wcci.albums.models.Tag;
 import org.wcci.albums.repositories.TagRepository;
 
@@ -36,7 +37,7 @@ public class TagController {
         return tagRepo.findById(id).get().getArtists();
     }
     @GetMapping("{id}/songs")
-    public Iterable<Artist> fetchTagSongs(@PathVariable Long id){
+    public Iterable<Song> fetchTagSongs(@PathVariable Long id){
         return tagRepo.findById(id).get().getSongs();
     }
 
