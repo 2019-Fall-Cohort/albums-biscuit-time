@@ -8,16 +8,21 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Tag {
 	@Id
 	@GeneratedValue
 	private Long id;
 	private String name;
+	@JsonIgnore
 	@ManyToMany
 	private List<Artist> artists;
+	@JsonIgnore
 	@ManyToMany
 	private List<Album> albums;
+	@JsonIgnore
 	@ManyToMany
 	private List<Song> songs;
 
