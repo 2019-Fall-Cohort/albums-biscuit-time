@@ -37,6 +37,17 @@ public class Tag {
 		return id;
 	}
 	
+	public List<Album> getAlbums() {
+        return albums;
+    }
+	
+	public List<Artist> getArtists() {
+	        return artists;
+	    }
+	public List<Artist> getSongs() {
+	        return artists;
+	    }
+	
 	public void addArtist(Artist artist) {
 		if (artists == null) {
 			artists = new ArrayList<>();
