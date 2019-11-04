@@ -1,12 +1,12 @@
-package org.wcci.albums;
+package org.wcci.albums.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(code = HttpStatus.NOT_FOUND)
-public class ArtistNotFoundException extends RuntimeException {
+public class SongNotFoundException extends RuntimeException {
 
-	public ArtistNotFoundException(String message) {
+	public SongNotFoundException(String message) {
 			super(message);
 	}
 }
