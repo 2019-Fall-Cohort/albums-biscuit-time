@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.wcci.albums.ArtistNotFoundException;
+import org.wcci.albums.exceptions.ArtistNotFoundException;
 import org.wcci.albums.models.Artist;
 import org.wcci.albums.repositories.ArtistRepository;
 

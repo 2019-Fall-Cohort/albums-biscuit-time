@@ -13,6 +13,7 @@ import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.wcci.albums.exceptions.AlbumNotFoundException;
 import org.wcci.albums.repositories.AlbumRepository;
 import org.wcci.albums.services.AlbumService;
 
