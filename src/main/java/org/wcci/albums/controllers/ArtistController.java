@@ -3,6 +3,7 @@ package org.wcci.albums.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,7 @@ import org.wcci.albums.models.Tag;
 import org.wcci.albums.repositories.TagRepository;
 import org.wcci.albums.services.ArtistService;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/artists")
 public class ArtistController {
