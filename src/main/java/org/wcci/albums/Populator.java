@@ -41,7 +41,7 @@ public class Populator implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		
 		//Instantiate 8 Artists
-		Artist artist1 = new Artist("David Bowie", "image1", "recordLabel1", "homeTown1");
+		Artist artist1 = new Artist("David Bowie", "https://cdn2.lamag.com/wp-content/uploads/sites/6/2016/01/bowie.jpg", "recordLabel1", "homeTown1");
 		Artist artist2 = new Artist("Cat Stevens", "image2", "recordLabel2", "homeTown2");
 		Artist artist3 = new Artist("Judy Collins", "image3", "recordLabel3", "homeTown3");
 		Artist artist4 = new Artist("Elton John", "image4", "recordLabel4", "homeTown4");
