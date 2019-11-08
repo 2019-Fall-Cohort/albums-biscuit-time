@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.wcci.albums.models.Album;
 import org.wcci.albums.models.Artist;
 import org.wcci.albums.models.Comment;
 import org.wcci.albums.models.Tag;
 import org.wcci.albums.repositories.TagRepository;
+import org.wcci.albums.services.AlbumService;
 import org.wcci.albums.services.ArtistService;
 
 @CrossOrigin
@@ -27,11 +29,18 @@ public class ArtistController {
 	@Autowired
 	private ArtistService artistService;
 	@Autowired
+	private AlbumService albumService;
+	@Autowired
 	private TagRepository tagRepo;
 
 	@GetMapping("")
 	public List<Artist> fetchAll() {
 		return artistService.fetchAllArtists();
+	}
+	
+	@GetMapping("/{id}/albums")
+	public List<Album> fetchAllAlbums(@PathVariable Long id) {
+		return albumService.fetchAllAlbums();
 	}
 
 	@PostMapping("")
