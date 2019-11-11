@@ -41,14 +41,14 @@ public class Populator implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		
 		//Instantiate 8 Artists
-		Artist artist1 = new Artist("David Bowie", "https://cdn2.lamag.com/wp-content/uploads/sites/6/2016/01/bowie.jpg", "recordLabel1", "homeTown1");
-		Artist artist2 = new Artist("Cat Stevens", "image2", "recordLabel2", "homeTown2");
-		Artist artist3 = new Artist("Judy Collins", "image3", "recordLabel3", "homeTown3");
-		Artist artist4 = new Artist("Elton John", "image4", "recordLabel4", "homeTown4");
-		Artist artist5 = new Artist("Bob Dylan", "image5", "recordLabel5", "homeTown5");
-		Artist artist6 = new Artist("Mumford & Sons", "image6", "recordLabel6", "homeTown6");
-		Artist artist7 = new Artist("CS&N", "image7", "recordLabel7", "homeTown7");
-		Artist artist8 = new Artist("Chris Stapleton", "image8", "recordLabel8", "homeTown8");
+		Artist artist1 = new Artist("David Bowie", "https://cdn2.lamag.com/wp-content/uploads/sites/6/2016/01/bowie.jpg", "Parlophone", "Bromley, Kent,UK");
+		Artist artist2 = new Artist("Cat Stevens", "https://www.rollingstone.com/wp-content/uploads/2018/06/rs-27915-catstevens-1800-1386942005.jpg", "A&M", "London, UK");
+		Artist artist3 = new Artist("Judy Collins", "https://www.mcall.com/resizer/W5ekIoDwL2zLDf-fBlF9wADvFfs=/800x449/top/arc-anglerfish-arc2-prod-tronc.s3.amazonaws.com/public/4OKB7APLQJBG7EWZ7S2M2IBUCU.jpg", "Wildflower", "Denver, CO");
+		Artist artist4 = new Artist("Elton John", "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Elton_John_Cannes_2019.jpg/375px-Elton_John_Cannes_2019.jpg", "Rocket", "Pinner, UK");
+		Artist artist5 = new Artist("Bob Dylan", "https://miro.medium.com/max/7860/1*_EDEWvWLREzlAvaQRfC_SQ.jpeg", "Columbia", "Hibbing, MN");
+		Artist artist6 = new Artist("Mumford & Sons", "https://www.billboard.com/files/styles/landscape_768/public/media/Mumford-and-Sons-press-by-Gavin-Batty-2019-billboard-1548.jpg", "Glassnote", "London, UK");
+		Artist artist7 = new Artist("CS&N", "https://images-na.ssl-images-amazon.com/images/I/811-vOtyMHL._SX522_.jpg", "Atlantic", "Los Angeles, CA");
+		Artist artist8 = new Artist("Chris Stapleton", "https://www.billboard.com/files/styles/landscape_768/public/media/chris-stapleton-smiling-MSG-2015-billboard-650.jpg", "Mercury Nashville", "Staffordsville, KY");
 
 		//Save all 8 Artists
 		artistService.saveArtist(artist1);
