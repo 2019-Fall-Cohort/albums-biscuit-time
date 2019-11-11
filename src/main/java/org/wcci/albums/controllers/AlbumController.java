@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.wcci.albums.models.Album;
 import org.wcci.albums.models.Comment;
+import org.wcci.albums.models.Song;
 import org.wcci.albums.models.Tag;
 import org.wcci.albums.repositories.TagRepository;
 import org.wcci.albums.services.AlbumService;
@@ -40,6 +41,13 @@ public class AlbumController {
 	@GetMapping("/{id}")
 	public Album fetchAlbum(@PathVariable Long id) {
 		return albumService.fetchAlbum(id);
+	}
+	
+	@GetMapping("/{id}/songs")
+	public List<Song> fetchAllAlbumSongs(@PathVariable Long id) {
+		Album retrievedAlbum = albumService.fetchAlbum(id);
+		List<Song> retrievedSongs = retrievedAlbum.getSongs();
+		return retrievedSongs;
 	}
 
 	@PatchMapping("/{id}/add-comment")
