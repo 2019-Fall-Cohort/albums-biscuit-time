@@ -39,8 +39,10 @@ public class ArtistController {
 	}
 	
 	@GetMapping("/{id}/albums")
-	public List<Album> fetchAllAlbums(@PathVariable Long id) {
-		return albumService.fetchAllAlbums();
+	public List<Album> fetchAllArtistAlbums(@PathVariable Long id) {
+		Artist retrievedArtist = artistService.fetchArtist(id);
+		List<Album> retrievedAlbums = retrievedArtist.getAlbums();
+		return retrievedAlbums;
 	}
 
 	@PostMapping("")
