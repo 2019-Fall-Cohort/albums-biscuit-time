@@ -70,5 +70,12 @@ public class ArtistController {
 		artist.addComment(comment);
 		return artistService.saveArtist(artist);
 	}
-
+	
+	@PatchMapping("/{id}/add-album")
+	public Artist addAlbum(@PathVariable long id, @RequestBody Album album) {
+		Artist artist = artistService.fetchArtist(id);
+		artist.addAlbum(album);
+		albumService.saveAlbum(album);
+		return artistService.saveArtist(artist);
+	}
 }
