@@ -106,6 +106,11 @@ public class Artist {
 		return homeTown;
 	}
 
+	public void addAlbum(Album album) {
+		albums.add(album);
+		
+	}
+
 	
 
 }
