@@ -12,11 +12,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.wcci.albums.models.Album;
+import org.wcci.albums.models.Artist;
 import org.wcci.albums.models.Comment;
 import org.wcci.albums.models.Song;
 import org.wcci.albums.models.Tag;
 import org.wcci.albums.repositories.TagRepository;
 import org.wcci.albums.services.AlbumService;
+import org.wcci.albums.services.SongService;
 
 @CrossOrigin
 @RestController
@@ -25,6 +27,8 @@ public class AlbumController {
 
 	@Autowired
 	private AlbumService albumService;
+	@Autowired
+	private SongService songService;
 	@Autowired
 	private TagRepository tagRepo;
 
@@ -63,6 +67,13 @@ public class AlbumController {
 		tag.addAlbum(album);
 		tagRepo.save(tag);
 		return albumService.fetchAlbum(id);
+	}
+	@PatchMapping("/{id}/add-song")
+	public Album addSong(@PathVariable long id, @RequestBody Song song) {
+		Album album = albumService.fetchAlbum(id);
+		album.addSong(song);
+		songService.saveSong(song);
+		return albumService.saveAlbum(album);
 	}
 
 }

@@ -117,4 +117,8 @@ public class Album {
 		return "Album [id=" + id + ", title=" + title + ", artist=" + artist + "]";
 	}
 
+	public void addSong(Song song) {
+		songs.add(song);
+	}
+
 }
