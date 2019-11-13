@@ -58,7 +58,7 @@ public class ArtistControllerTest {
 		testArtist = new Artist("jane", "image", "record label", "hometown");
 		mockMvc = MockMvcBuilders.standaloneSetup(underTest).build();
 	}
-
+	
 	@Test
 	public void fetchAllReturnsListOfArtists() {
 		when(artistService.fetchAllArtists()).thenReturn(Collections.singletonList(testArtist));
@@ -66,12 +66,19 @@ public class ArtistControllerTest {
 		assertThat(retrievedArtists, contains(testArtist));
 	}
 
+//	@Test
+//	public void addArtistShouldAddOneArtist() {
+//		underTest.addArtist(testArtist);
+//		List<Artist> retrievedArtists = underTest.fetchAll();
+//		assertThat(retrievedArtists, contains(testArtist));
+//	}
+
 	@Test
 	public void shouldReturnAllArtists() throws Exception {
 		when(artistService.fetchAllArtists()).thenReturn(Collections.singletonList(testArtist));
 		mockMvc.perform(get("/api/artists")).andDo(print()).andExpect(status().isOk())
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8)).andExpect(jsonPath("$", hasSize(1)))
-				.andExpect(jsonPath("$[0].name", is(equalTo("jane"))));
+			   .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8)).andExpect(jsonPath("$", hasSize(1)))
+			   .andExpect(jsonPath("$[0].name", is(equalTo("jane"))));
 	}
 
 	@Test

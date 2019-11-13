@@ -4,6 +4,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.fail;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.Optional;
@@ -25,6 +26,8 @@ public class ArtistServiceTest {
 	ArtistService underTest;
 	@Mock
 	private ArtistRepository artistRepo;
+	@Mock
+	private Artist mockArtist;
 	
 	@Before
 	public void setup() {
@@ -41,5 +44,17 @@ public class ArtistServiceTest {
     		 assertThat(e.getMessage(), is(equalTo("Artist not found.")));
     	 }
     }
+	
+	@Test
+	public void shouldAddArtistToRepo() throws Exception {
+		Artist storedArtist = underTest.saveArtist(mockArtist);
+		verify(artistRepo).save(mockArtist);
+	}
 
+	@Test
+	public void shouldDeleteArtistFromRepo() throws Exception {
+		underTest.deleteArtist(mockArtist);
+		verify(artistRepo).delete(mockArtist);
+	}
+	
 }
