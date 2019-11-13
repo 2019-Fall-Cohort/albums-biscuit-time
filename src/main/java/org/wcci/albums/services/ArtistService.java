@@ -18,6 +18,10 @@ public class ArtistService {
 	public Artist saveArtist(Artist artist) {
 		return artistRepo.save(artist);
 	}
+	
+	public void deleteArtist(Artist artist) {
+		artistRepo.delete(artist);
+	}
 
 	public Artist fetchArtist(Long id)  {
 		Optional<Artist> retrievedArtistOptional = artistRepo.findById(id);
