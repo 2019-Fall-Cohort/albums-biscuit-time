@@ -20,7 +20,7 @@ import org.wcci.albums.repositories.TagRepository;
 import org.wcci.albums.services.AlbumService;
 import org.wcci.albums.services.SongService;
 
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("/api/albums")
 public class AlbumController {
@@ -68,11 +68,12 @@ public class AlbumController {
 		tagRepo.save(tag);
 		return albumService.fetchAlbum(id);
 	}
+	@CrossOrigin(origins = "http://localhost:8081")
 	@PatchMapping("/{id}/add-song")
 	public Album addSong(@PathVariable long id, @RequestBody Song song) {
 		Album album = albumService.fetchAlbum(id);
-		album.addSong(song);
-		songService.saveSong(song);
+		Song songToAdd = new Song(song.getName(), album);
+		songService.saveSong(songToAdd);
 		return albumService.saveAlbum(album);
 	}
 

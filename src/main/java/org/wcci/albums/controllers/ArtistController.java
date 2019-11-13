@@ -2,6 +2,7 @@ package org.wcci.albums.controllers;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,8 +22,8 @@ import org.wcci.albums.models.Tag;
 import org.wcci.albums.repositories.TagRepository;
 import org.wcci.albums.services.AlbumService;
 import org.wcci.albums.services.ArtistService;
-
-@CrossOrigin
+	
+@CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("/api/artists")
 public class ArtistController {
@@ -77,12 +78,12 @@ public class ArtistController {
 		artist.addComment(comment);
 		return artistService.saveArtist(artist);
 	}
-	
+	@CrossOrigin(origins = "http://localhost:8081")
 	@PatchMapping("/{id}/add-album")
 	public Artist addAlbum(@PathVariable long id, @RequestBody Album album) {
 		Artist artist = artistService.fetchArtist(id);
-		artist.addAlbum(album);
-		albumService.saveAlbum(album);
+		Album albumToAdd = new Album(album.getTitle(), artist); 
+		albumService.saveAlbum(albumToAdd);
 		return artistService.saveArtist(artist);
 	}
 }
