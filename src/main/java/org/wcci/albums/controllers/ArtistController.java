@@ -23,7 +23,7 @@ import org.wcci.albums.repositories.TagRepository;
 import org.wcci.albums.services.AlbumService;
 import org.wcci.albums.services.ArtistService;
 	
-@CrossOrigin(origins = "http://localhost:8081")
+@CrossOrigin
 @RestController
 @RequestMapping("/api/artists")
 public class ArtistController {
